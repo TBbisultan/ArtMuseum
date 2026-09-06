@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>AA — Музей искусств</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="AA — Музей искусств. Искусство будущего.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+/* ============ ПЕРЕМЕННЫЕ ============ */
+:root{
+  --paper:#C8C6C0;
+  --paper-2:#CFCDC7;
+  --paper-3:#BAB8B1;
+  --ink:#121110;
+  --ink-soft:#4A4844;
+  --ink-faint:#84817A;
+  --line:rgba(18,17,16,.24);
+  --line-strong:rgba(18,17,16,.46);
+  --accent:#121110;
+  --accent-soft:rgba(18,17,16,.07);
+  --white:#F1F0EC;
+  --frame:14px;
+  --frame-radius:26px;
+  --maxw:1380px;
+  --gutter:clamp(20px,4vw,64px);
+  --serif:'Instrument Sans',sans-serif;
+  --sans:'Instrument Sans',sans-serif;
+  --ease:cubic-bezier(.16,.8,.24,1);
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;} *{animation-duration:.001ms !important; transition-duration:.001ms !important;}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-style:italic;font-weight:400;font-size:16.5px;line-height:1.55;-webkit-font-smoothing:antialiased;padding:var(--frame);}
+h1,h2,h3,h4{margin:0;font-family:var(--serif);font-weight:500;font-style:italic;letter-spacing:-.01em;color:var(--ink);}
+p{margin:0;}
+a{color:inherit;text-decoration:none;}
+button{font-family:var(--serif);font-style:italic;}
+img,svg{display:block;max-width:100%;}
+input,select,textarea{font-family:var(--sans);font-style:normal;font-size:15px;color:var(--ink);}
+label{font-style:normal;}
+::selection{background:var(--ink);color:var(--paper);}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;}
+
+.page-frame-ring{position:fixed;inset:0;border:var(--frame) solid var(--ink);border-radius:var(--frame-radius);pointer-events:none;z-index:9999;box-sizing:border-box;}
+@media (max-width:640px){
+  :root{--frame:8px;--frame-radius:16px;}
+}
+
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter);}
+.eyebrow{font-family:var(--sans);font-style:normal;font-size:11.5px;letter-spacing:.09em;color:var(--ink-soft);text-transform:uppercase;}
+.hr{border:none;border-top:1px solid var(--line);}
+
+/* ============ КНОПКИ ============ */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;background:var(--ink);color:var(--paper);border:1px solid var(--ink);border-radius:0;font-size:16px;font-style:italic;font-weight:400;letter-spacing:0;cursor:pointer;transition:background .3s var(--ease),color .3s var(--ease);}
+.btn:hover{background:transparent;color:var(--ink);}
+.btn:disabled{opacity:.35;cursor:not-allowed;}
+.btn:disabled:hover{background:var(--ink);color:var(--paper);}
+.btn-outline{background:transparent;color:var(--ink);border:1px solid var(--line-strong);}
+.btn-outline:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.btn-ghost{background:transparent;border:none;color:var(--ink);padding:0;font-size:15.5px;font-style:italic;font-weight:400;letter-spacing:0;border-bottom:1px solid var(--ink);border-radius:0;padding-bottom:3px;}
+.btn-ghost:hover{color:var(--ink-soft);}
+.btn-sm{padding:11px 18px;font-size:14.5px;}
+.btn-block{width:100%;justify-content:center;}
+
+/* ============ НАВИГАЦИЯ ============ */
+.site-nav{position:sticky;top:var(--frame);z-index:100;background:rgba(200,198,192,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.nav-row{display:flex;align-items:center;justify-content:space-between;padding:20px var(--gutter);max-width:var(--maxw);margin:0 auto;gap:24px;}
+.brand{display:flex;align-items:flex-start;gap:10px;cursor:pointer;}
+.brand-mark{font-family:var(--serif);font-style:italic;font-size:27px;font-weight:500;line-height:.85;}
+.brand-word{font-family:var(--sans);font-style:normal;font-size:10px;letter-spacing:.1em;color:var(--ink-soft);line-height:1.4;padding-top:4px;}
+.nav-links{display:flex;gap:36px;list-style:none;margin:0;padding:0;}
+.nav-links a{font-family:var(--serif);font-style:italic;font-size:16.5px;font-weight:400;letter-spacing:0;color:var(--ink-soft);position:relative;padding:6px 0;transition:color .25s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-links a.active{color:var(--ink);}
+.nav-links a.active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);}
+.nav-right{display:flex;align-items:center;gap:18px;}
+.burger{display:none;background:none;border:none;cursor:pointer;padding:6px;flex-direction:column;gap:5px;}
+.burger span{width:22px;height:1px;background:var(--ink);display:block;}
+.mobile-menu{display:none;flex-direction:column;gap:2px;padding:6px var(--gutter) 20px;border-bottom:1px solid var(--line);background:var(--paper-2);}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{padding:14px 0;font-family:var(--serif);font-style:italic;font-size:17px;font-weight:400;border-bottom:1px solid var(--line);color:var(--ink-soft);}
+.mobile-menu a.active{color:var(--ink);}
+@media (max-width:860px){
+  .nav-links{display:none;}
+  .burger{display:flex;}
+}
+
+/* ============ АНИМАЦИЯ ПЕРЕХОДА ============ */
+#app{animation:fadein .5s var(--ease);}
+@keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* ============ СЕКЦИИ ============ */
+.section{padding:96px 0;}
+.section-tight{padding:56px 0;}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:44px;flex-wrap:wrap;}
+.section-title{font-size:clamp(28px,3.4vw,44px);}
+.section-sub{max-width:440px;color:var(--ink-soft);font-size:15px;line-height:1.6;}
+
+/* ============ ШАПКА (HERO) ============ */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:56px 0 90px;}
+.hero-copy .eyebrow{margin-bottom:22px;display:block;}
+.hero-title{font-size:clamp(52px,8vw,108px);line-height:.94;font-style:italic;}
+.hero-desc{margin-top:26px;font-size:16.5px;color:var(--ink-soft);max-width:360px;line-height:1.6;}
+.hero-ctas{margin-top:40px;display:flex;gap:28px;align-items:center;flex-wrap:wrap;}
+.hero-visual{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--paper-2);perspective:1400px;}
+.hero-visual svg{width:100%;height:100%;}
+.hero-visual .tilt-wrap{width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.16,.8,.24,1);will-change:transform;}
+.hero-visual .tilt-wrap img{width:100%;height:100%;object-fit:cover;display:block;transform:translateZ(0);}
+.hero-visual .glare{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.45),transparent 55%);mix-blend-mode:overlay;}
+.hero-visual:hover .glare{opacity:1;}
+@media (prefers-reduced-motion:reduce){.hero-visual .tilt-wrap{transition:none;}}
+@media (max-width:960px){
+  .hero{grid-template-columns:1fr;}
+  .hero-visual{order:-1;aspect-ratio:16/10;}
+}
+
+/* ============ КАРТОЧКИ ============ */
+.grid{display:grid;gap:2px;background:var(--line);border:1px solid var(--line);}
+.grid > *{background:var(--paper);}
+.cols-3{grid-template-columns:repeat(3,1fr);}
+.cols-2{grid-template-columns:repeat(2,1fr);}
+.cols-4{grid-template-columns:repeat(4,1fr);}
+@media (max-width:960px){.cols-3,.cols-4{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:600px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr;}}
+
+.ex-card{display:flex;flex-direction:column;}
+.ex-card-media{aspect-ratio:4/5;overflow:hidden;}
+.ex-card-media svg{transition:transform .8s var(--ease);}
+.ex-card:hover .ex-card-media svg{transform:scale(1.045);}
+.ex-card-body{padding:26px 28px 30px;display:flex;flex-direction:column;gap:12px;flex:1;}
+.badge{display:inline-flex;align-self:flex-start;font-size:11px;letter-spacing:.06em;font-weight:700;padding:5px 10px;border:1px solid var(--line-strong);color:var(--ink-soft);}
+.badge.is-current{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.badge.is-upcoming{border-color:var(--accent);color:var(--accent);}
+.ex-card-title{font-size:23px;}
+.ex-card-meta{font-size:13px;color:var(--ink-soft);line-height:1.5;}
+.ex-card-desc{font-size:14px;color:var(--ink-soft);line-height:1.55;flex:1;}
+.ex-card-foot{margin-top:8px;}
+
+.event-card{padding:28px;display:flex;flex-direction:column;gap:14px;}
+.event-date{display:flex;gap:14px;align-items:baseline;}
+.event-day{font-family:var(--serif);font-style:italic;font-size:34px;line-height:1;}
+.event-monthtime{font-size:12.5px;color:var(--ink-soft);letter-spacing:.03em;}
+.event-title{font-size:20px;margin-top:2px;}
+.event-desc{font-size:13.5px;color:var(--ink-soft);line-height:1.55;flex:1;}
+.event-tag{font-size:11px;letter-spacing:.05em;font-weight:700;color:var(--accent);}
+
+.art-card{display:flex;flex-direction:column;cursor:pointer;}
+.art-card-media{aspect-ratio:3/4;overflow:hidden;position:relative;}
+.art-card-media svg{transition:transform .7s var(--ease), filter .5s;}
+.art-card:hover .art-card-media svg{transform:scale(1.06);}
+.art-card-body{padding:18px 20px 22px;}
+.art-card-title{font-size:16.5px;font-family:var(--serif);font-style:italic;}
+.art-card-meta{font-size:12px;color:var(--ink-soft);margin-top:5px;letter-spacing:.02em;}
+
+/* ============ ПАНЕЛЬ ФИЛЬТРОВ ============ */
+.filterbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px;align-items:center;}
+.chip{padding:9px 18px;border:1px solid var(--line-strong);background:transparent;font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--ink-soft);cursor:pointer;transition:all .25s;}
+.chip:hover{border-color:var(--ink);color:var(--ink);}
+.chip.active{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.search-input{flex:1;min-width:180px;padding:11px 16px;border:1px solid var(--line-strong);background:var(--white);font-size:14px;}
+.select-input{padding:11px 14px;border:1px solid var(--line-strong);background:var(--white);font-size:13.5px;color:var(--ink-soft);}
+
+/* ============ РАЗМЕТКА ГАЛЕРЕИ ============ */
+.gallery-layout{display:grid;grid-template-columns:220px 1fr;gap:60px;align-items:start;}
+.gallery-side-title{font-family:var(--sans);font-style:normal;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:10px;margin-bottom:16px;}
+.gallery-cat-list{list-style:none;margin:0;padding:0;}
+.gallery-cat-list li{margin-bottom:4px;}
+.gallery-cat-list button{display:block;width:100%;text-align:left;background:none;border:none;padding:9px 0;font-family:var(--serif);font-style:italic;font-size:16px;color:var(--ink-soft);cursor:pointer;}
+.gallery-cat-list button:hover{color:var(--ink);}
+.gallery-cat-list button.active{color:var(--ink);text-decoration:underline;text-underline-offset:5px;}
+.gallery-side .search-input,.gallery-side .select-input{width:100%;}
+@media (max-width:860px){.gallery-layout{grid-template-columns:1fr;} .gallery-side{order:2;} .gallery-main{order:1;}}
+
+/* ============ ПОДВАЛ ============ */
+.site-footer{border-top:1px solid var(--line);padding:64px 0 40px;background:var(--paper-2);}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;}
+.footer-col-title{font-size:11.5px;letter-spacing:.06em;color:var(--ink-faint);margin-bottom:16px;}
+.footer-col a,.footer-col p{display:block;font-size:14px;color:var(--ink-soft);margin-bottom:10px;}
+.footer-col a:hover{color:var(--ink);}
+.footer-bottom{margin-top:56px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:var(--ink-faint);font-size:12.5px;flex-wrap:wrap;gap:10px;}
+@media (max-width:860px){.footer-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:520px){.footer-grid{grid-template-columns:1fr;}}
+
+/* ============ СТРАНИЦЫ С ДЕТАЛЯМИ ============ */
+.detail-hero{aspect-ratio:16/8;overflow:hidden;border-bottom:1px solid var(--line);}
+.detail-hero svg{width:100%;height:100%;}
+.detail-head{padding:44px 0 10px;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;}
+.detail-title{font-size:clamp(30px,4.5vw,54px);}
+.detail-meta-row{display:flex;gap:34px;flex-wrap:wrap;margin:26px 0 40px;padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.detail-meta-item .eyebrow{margin-bottom:6px;}
+.detail-meta-item div{font-size:15px;}
+.detail-body{display:grid;grid-template-columns:1.4fr .8fr;gap:60px;}
+.detail-desc{font-size:16px;line-height:1.75;color:var(--ink-soft);max-width:640px;}
+.detail-desc p+p{margin-top:18px;}
+.side-box{border:1px solid var(--line);padding:26px;margin-bottom:22px;}
+.side-box h4{font-size:16px;margin-bottom:14px;}
+@media (max-width:900px){.detail-body{grid-template-columns:1fr;}}
+
+.thumbrow{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);border:1px solid var(--line);margin-top:20px;}
+.thumbrow div{aspect-ratio:1;overflow:hidden;background:var(--paper);}
+@media (max-width:700px){.thumbrow{grid-template-columns:repeat(2,1fr);}}
+
+/* ============ СТРАНИЦА БИЛЕТОВ ============ */
+.steps-track{display:flex;gap:0;margin-bottom:52px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.step-pill{flex:1;padding:18px 8px;text-align:center;font-size:12.5px;font-weight:700;letter-spacing:.04em;color:var(--ink-faint);border-right:1px solid var(--line);position:relative;}
+.step-pill:last-child{border-right:none;}
+.step-pill.active{color:var(--ink);}
+.step-pill.done{color:var(--accent);}
+.step-pill span{display:block;font-size:20px;font-family:var(--serif);font-style:italic;margin-bottom:4px;}
+
+.ticket-row{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid var(--line);gap:20px;}
+.ticket-row:first-child{border-top:1px solid var(--line);}
+.ticket-name{font-size:19px;font-family:var(--serif);font-style:italic;}
+.ticket-price{font-size:13px;color:var(--ink-soft);margin-top:4px;}
+.qty-control{display:flex;align-items:center;gap:0;border:1px solid var(--line-strong);}
+.qty-control button{width:38px;height:38px;background:none;border:none;font-size:17px;cursor:pointer;color:var(--ink);}
+.qty-control button:hover{background:var(--ink);color:var(--paper);}
+.qty-control button:disabled{opacity:.3;cursor:not-allowed;}
+.qty-control button:disabled:hover{background:none;color:var(--ink);}
+.qty-num{width:42px;text-align:center;font-size:15px;font-weight:700;}
+
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
+.cal-dow{text-align:center;font-size:11px;color:var(--ink-faint);letter-spacing:.05em;padding-bottom:6px;}
+.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:14px;border:1px solid var(--line);cursor:pointer;background:var(--white);transition:all .2s;position:relative;}
+.cal-day:hover:not(.disabled){border-color:var(--ink);}
+.cal-day.disabled{color:var(--ink-faint);cursor:not-allowed;background:transparent;border-color:transparent;text-decoration:line-through;opacity:.5;}
+.cal-day.selected{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.cal-day.empty{border-color:transparent;cursor:default;}
+.cal-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
+.cal-nav button{background:none;border:1px solid var(--line-strong);width:36px;height:36px;cursor:pointer;font-size:15px;}
+.cal-nav button:hover{background:var(--ink);color:var(--paper);}
+.cal-month{font-family:var(--serif);font-style:italic;font-size:20px;}
+
+.slot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-top:22px;}
+.slot-btn{padding:15px 8px;border:1px solid var(--line-strong);background:var(--white);cursor:pointer;font-size:14.5px;font-weight:600;text-align:center;}
+.slot-btn:hover:not(.disabled){border-color:var(--ink);}
+.slot-btn.selected{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.slot-btn.disabled{color:var(--ink-faint);text-decoration:line-through;cursor:not-allowed;opacity:.5;}
+
+.summary-box{border:1px solid var(--line);padding:30px;position:sticky;top:100px;}
+.summary-line{display:flex;justify-content:space-between;font-size:14px;padding:10px 0;border-bottom:1px solid var(--line);color:var(--ink-soft);}
+.summary-total{display:flex;justify-content:space-between;padding-top:18px;font-size:20px;font-family:var(--serif);font-style:italic;}
+
+.form-row{margin-bottom:20px;}
+.form-row label{display:block;font-size:12.5px;letter-spacing:.03em;color:var(--ink-soft);margin-bottom:8px;font-weight:600;}
+.form-row input,.form-row textarea{width:100%;padding:13px 16px;border:1px solid var(--line-strong);background:var(--white);font-size:14.5px;}
+.form-row input:focus,.form-row textarea:focus{border-color:var(--ink);}
+.form-row.err input,.form-row.err textarea{border-color:var(--ink);border-width:2px;}
+.err-msg{font-size:12px;color:var(--ink);font-weight:700;margin-top:6px;display:none;}
+.form-row.err .err-msg{display:block;}
+.form-two{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media (max-width:600px){.form-two{grid-template-columns:1fr;}}
+
+.confirm-box{max-width:640px;margin:0 auto;text-align:center;padding:70px 0;}
+.confirm-qr{width:150px;height:150px;margin:34px auto;border:1px solid var(--line);padding:14px;}
+.confirm-id{font-family:var(--serif);font-style:italic;font-size:32px;margin:18px 0;}
+.confirm-detail-row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--ink-soft);text-align:left;}
+
+/* ============ ПОСЕЩЕНИЕ ============ */
+.hours-table{width:100%;border-collapse:collapse;}
+.hours-table tr{border-bottom:1px solid var(--line);}
+.hours-table td{padding:16px 0;font-size:15px;}
+.hours-table td:last-child{text-align:right;color:var(--ink-soft);}
+.map-box{aspect-ratio:16/10;border:1px solid var(--line);position:relative;overflow:hidden;background:var(--paper-2);}
+
+/* ============ О МУЗЕЕ ============ */
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);border:1px solid var(--line);}
+@media (max-width:860px){.team-grid{grid-template-columns:repeat(2,1fr);}}
+.team-card{background:var(--paper);padding:24px;}
+.team-avatar{aspect-ratio:1;margin-bottom:16px;overflow:hidden;}
+.team-name{font-size:16px;font-family:var(--serif);font-style:italic;}
+.team-role{font-size:12.5px;color:var(--ink-soft);margin-top:3px;}
+
+/* ============ ПРОЧЕЕ ============ */
+.empty-state{padding:80px 20px;text-align:center;color:var(--ink-faint);font-size:15px;border:1px dashed var(--line-strong);}
+.pagelead{max-width:640px;}
+.small-note{font-size:12.5px;color:var(--ink-faint);margin-top:14px;}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:16px 26px;font-size:14px;z-index:200;opacity:0;pointer-events:none;transition:opacity .35s,transform .35s;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(-6px);}
+.back-link{display:inline-block;margin-bottom:26px;font-size:13px;color:var(--ink-soft);letter-spacing:.02em;}
+.back-link:hover{color:var(--ink);}
+
+/* ============ ПАНЕЛЬ «НАЗАД» ============ */
+#backBar{border-bottom:1px solid transparent;}
+#backBar.show{border-bottom:1px solid var(--line);}
+.backbar-inner{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter);height:0;overflow:hidden;display:flex;align-items:center;transition:height .25s var(--ease);}
+#backBar.show .backbar-inner{height:52px;}
+.backbar-btn{background:none;border:none;cursor:pointer;padding:0;font-family:var(--serif);font-style:italic;font-size:15px;color:var(--ink-soft);display:inline-flex;align-items:center;gap:8px;transition:color .2s;}
+.backbar-btn:hover{color:var(--ink);}
+.backbar-btn .arrow{display:inline-block;transition:transform .2s;}
+.backbar-btn:hover .arrow{transform:translateX(-3px);}
+.related-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line);margin-top:16px;}
+@media (max-width:700px){.related-strip{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="page-frame-ring" aria-hidden="true"></div>
+
+<nav class="site-nav">
+  <div class="nav-row">
+    <div class="brand" data-action="nav" data-route="/">
+      <span class="brand-mark">AA</span>
+      <span class="brand-word">МУЗЕЙ<br>ИСКУССТВ</span>
+    </div>
+    <ul class="nav-links" id="navLinks"></ul>
+    <div class="nav-right">
+      <a class="btn btn-sm" data-action="nav" data-route="/tickets" href="#/tickets">Билеты</a>
+      <button class="burger" data-action="toggleMenu" aria-label="Открыть меню"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu"></div>
+</nav>
+
+<div id="backBar"><div class="backbar-inner"><button class="backbar-btn" data-action="goBack"><span class="arrow">←</span> Назад</button></div></div>
+
+<div id="app"></div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-col-title">AA — МУЗЕЙ ИСКУССТВ</div>
+        <p>Место, где искусство встречает завтра.</p>
+        <p>Алматы, ул. Абая 77, Казахстан</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">РАЗДЕЛЫ</div>
+        <a href="#/exhibitions" data-action="nav" data-route="/exhibitions">Выставки</a>
+        <a href="#/gallery" data-action="nav" data-route="/gallery">Галерея</a>
+        <a href="#/events" data-action="nav" data-route="/events">События</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">ИНФОРМАЦИЯ</div>
+        <a href="#/visit" data-action="nav" data-route="/visit">Посещение</a>
+        <a href="#/about" data-action="nav" data-route="/about">О музее</a>
+        <a href="#/contact" data-action="nav" data-route="/contact">Контакты</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">КОНТАКТЫ</div>
+        <a href="mailto:aamuseum@gmail.com">aamuseum@gmail.com</a>
+        <a href="tel:+77473546835">+7 747 (354) 68-35</a>
+        <p>Instagram · Telegram</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 AA — Музей искусств</span>
+      <span>Искусство, история и идеи в одном пространстве.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =================================================================
+   ДАННЫЕ
+================================================================= */
+/* =================================================================
+   ФОТОГРАФИИ — вставьте сюда своё изображение вместо генеративной
+   иллюстрации. Подходит обычная ссылка ('https://...') или base64
+   ('data:image/jpeg;base64,...'). Оставьте null, чтобы использовать
+   сгенерированную заглушку. Для финальной версии лучше использовать
+   base64 — тогда сайт остаётся одним файлом без внешних ссылок.
+================================================================= */
+const HERO_IMAGE = '3ddev.png'; // например: 'data:image/jpeg;base64,/9j/4AAQ...' или 'https://example.com/photo.jpg'
+
+const TODAY = new Date(); TODAY.setHours(0,0,0,0);
+function addDays(d,n){const r=new Date(d);r.setDate(r.getDate()+n);return r;}
+function iso(d){return d.toISOString().slice(0,10);}
+function fmtLong(d){return d.toLocaleDateString('ru-RU',{weekday:'long',month:'long',day:'numeric',year:'numeric'});}
+function fmtShort(d){return d.toLocaleDateString('ru-RU',{month:'short',day:'numeric'});}
+
+const EXHIBITIONS = [
+  {id:'digital-human',title:'Цифровой человек',artist:'Елена Восс',category:'Скульптура',status:'current',
+   dateStart:addDays(TODAY,-40),dateEnd:addDays(TODAY,42),dateLabel:'12 сен — 24 ноя 2026',location:'Зал A · 1 этаж',
+   short:'Тело, воссозданное в коде — скульптура, motion capture и синтетическая кожа.',
+   long:['«Цифровой человек» исследует то, что остаётся от тела после сканирования, риггинга и рендера. Елена Восс наносит синтетическую кожу на каркасы, построенные по данным motion capture, создавая фигуры, которые читаются одновременно как интимные и промышленные.',
+         'Выставка разворачивается в пяти залах — от скульптур из необработанных данных до полностью готовых фигур, освещённых как на модных съёмках. Посетителям предлагается пройти весь путь тела, превращающегося в изображение.'],
+   hours:'10:00 — 20:00, вт–вс'},
+  {id:'silent-architecture',title:'Тихая архитектура',artist:'Томас Рейес',category:'Фотография',status:'current',
+   dateStart:addDays(TODAY,-25),dateEnd:addDays(TODAY,20),dateLabel:'03 авг — 15 окт 2026',location:'Зал C · 2 этаж',
+   short:'Крупноформатные фотографии бруталистских интерьеров без людей.',
+   long:['Томас Рейес три года снимал муниципальные здания Центральной Азии на рассвете, до прихода сотрудников. Получившиеся отпечатки оставляют бетон, свет и тень единственными обитателями этих пространств.',
+         '«Тихая архитектура» задаётся вопросом, что здание говорит об обществе, когда из кадра исчезают люди.'],
+   hours:'10:00 — 20:00, вт–вс'},
+  {id:'fragments-of-light',title:'Осколки света',artist:'Ингрид Сорель',category:'Живопись',status:'current',
+   dateStart:addDays(TODAY,-15),dateEnd:addDays(TODAY,60),dateLabel:'20 июл — 05 окт 2026',location:'Зал B · 1 этаж',
+   short:'Масляные этюды побережий, написанные по памяти, а не с натуры.',
+   long:['Ингрид Сорель пишет исключительно по памяти, отказываясь от фотографий как источника. Результат — серия прибрежных сцен, дрейфующих к абстракции, объединённых дисциплиной её палитры.',
+         'Это её первая институциональная ретроспектива, объединяющая одиннадцать лет работы в мастерской.'],
+   hours:'10:00 — 20:00, вт–вс'},
+  {id:'the-vanishing-point',title:'Точка схода',artist:'Noema Collective',category:'Инсталляция',status:'upcoming',
+   dateStart:addDays(TODAY,55),dateEnd:addDays(TODAY,150),dateLabel:'02 дек 2026 — 18 фев 2027',location:'Зал D · 2 этаж',
+   short:'Инсталляция в масштабе комнаты — зеркальные коридоры и смещённая перспектива.',
+   long:['Noema Collective строят архитектуру, которая не даёт зафиксировать единую точку обзора. «Точка схода» помещает посетителей в коридор из наклонных зеркал, которые никогда не складываются в единое устойчивое отражение.',
+         'Инсталляция была впервые показана в Лиссабоне и перестроена для AA в удвоенном масштабе.'],
+   hours:'Открытие 02 дек 2026'},
+  {id:'matter-and-memory',title:'Материя и память',artist:'Адаезе Нвосу',category:'Скульптура',status:'upcoming',
+   dateStart:addDays(TODAY,90),dateEnd:addDays(TODAY,200),dateLabel:'14 янв — 30 мар 2027',location:'Зал A · 1 этаж',
+   short:'Бронзовые формы, отлитые по сканам бытовых предметов.',
+   long:['Адаезе Нвосу сканирует повседневные предметы из своей семьи и переотливает их в бронзе в изменённом масштабе, превращая домашний беспорядок в монументы.',
+         '«Материя и память» — её первая персональная выставка за пределами Западной Африки.'],
+   hours:'Открытие 14 янв 2027'},
+  {id:'after-nature',title:'После природы',artist:'Studio Kleón',category:'Фотография',status:'past',
+   dateStart:addDays(TODAY,-180),dateEnd:addDays(TODAY,-90),dateLabel:'10 мар — 02 июн 2026',location:'Зал C · 2 этаж',
+   short:'Документальная фотография рекультивированных промышленных земель.',
+   long:['«После природы» прослеживает медленное возвращение растительности на закрытые горнодобывающие участки на трёх континентах.',
+         'Выставка завершилась в июне 2026 года после двенадцати недель показа.'],
+   hours:'Закрыта'},
+  {id:'starry-night-revisited',title:'Звёздная ночь. Новый взгляд',artist:'Юки Танака',category:'Живопись',status:'past',
+   dateStart:addDays(TODAY,-240),dateEnd:addDays(TODAY,-180),dateLabel:'05 янв — 28 фев 2026',location:'Зал B · 1 этаж',
+   short:'Современное осмысление ночного неба Ван Гога.',
+   long:['Юки Танака переосмыслила вихревое небо Ван Гога через призму данных о световом загрязнении, заменив звёзды следами спутников.',
+         'Каталог выставки всё ещё доступен в музейном магазине.'],
+   hours:'Закрыта'},
+];
+
+const EVENTS = [
+  {id:'talk-elena-voss',title:'Встреча с художником: Елена Восс',type:'talk',typeLabel:'Лекция',date:addDays(TODAY,2),time:'18:30',duration:'60 мин',location:'Аудитория',
+   desc:'Елена Восс рассказывает о создании «Цифрового человека» и этике сканирования тела.',seats:24,seatsLeft:9,relatedExhibition:'digital-human'},
+  {id:'tour-digital-human',title:'Экскурсия: Цифровой человек',type:'tour',typeLabel:'Экскурсия',date:addDays(TODAY,1),time:'11:00',duration:'45 мин',location:'Зал A',
+   desc:'Подробный разбор создания «Цифрового человека» с одним из наших кураторов.',seats:15,seatsLeft:5,relatedExhibition:'digital-human'},
+  {id:'workshop-build-light',title:'Семейный мастер-класс: Строим со светом',type:'workshop',typeLabel:'Мастер-класс',date:addDays(TODAY,6),time:'12:00',duration:'90 мин',location:'Студия 2',
+   desc:'Практическое занятие для семей — свет, тень и простые электрические схемы.',seats:20,seatsLeft:20,relatedExhibition:null},
+  {id:'screening-optical-unconscious',title:'Показ фильма: Оптическое бессознательное',type:'screening',typeLabel:'Показ',date:addDays(TODAY,9),time:'19:30',duration:'85 мин',location:'Аудитория',
+   desc:'Короткий документальный фильм о фотографии и восприятии с последующим обсуждением.',seats:60,seatsLeft:41,relatedExhibition:'silent-architecture'},
+  {id:'tour-silent-architecture',title:'Экскурсия: Тихая архитектура',type:'tour',typeLabel:'Экскурсия',date:addDays(TODAY,4),time:'15:00',duration:'45 мин',location:'Зал C',
+   desc:'Прогулка по фотографиям Томаса Рейеса с членом нашей кураторской команды.',seats:15,seatsLeft:0,relatedExhibition:'silent-architecture'},
+  {id:'talk-fragments-of-light',title:'Беседа с куратором: Осколки света',type:'talk',typeLabel:'Лекция',date:addDays(TODAY,14),time:'18:00',duration:'50 мин',location:'Зал B',
+   desc:'Подробный разбор прибрежных картин Ингрид Сорель с нашим главным куратором.',seats:30,seatsLeft:22,relatedExhibition:'fragments-of-light'},
+  {id:'workshop-darkroom',title:'Мастер-класс: Основы фотолаборатории',type:'workshop',typeLabel:'Мастер-класс',date:addDays(TODAY,20),time:'10:30',duration:'120 мин',location:'Студия 1',
+   desc:'Введение в аналоговую печать для начинающих. Материалы включены.',seats:12,seatsLeft:3,relatedExhibition:null},
+  {id:'screening-structures-of-seeing',title:'Ночной показ: Структуры зрения',type:'screening',typeLabel:'Показ',date:addDays(TODAY,27),time:'20:00',duration:'70 мин',location:'Аудитория',
+   desc:'Ночная программа экспериментальных короткометражных фильмов о зрении и пространстве.',seats:60,seatsLeft:52,relatedExhibition:null},
+];
+
+const ARTWORKS = [
+  {id:'coast-at-dusk',title:'Побережье на закате',artist:'Ингрид Сорель',year:2024,category:'Живопись',medium:'Масло, лён',dim:'140 × 190 см',
+   desc:'Написана полностью по памяти — холст сжимает три разных побережья в один воображаемый берег.'},
+  {id:'harbor-no-4',title:'Гавань №4',artist:'Ингрид Сорель',year:2023,category:'Живопись',medium:'Масло, холст',dim:'110 × 150 см',
+   desc:'Часть серии «Гавань», исследующей границу между водой и промышленной структурой.'},
+  {id:'the-long-room',title:'Длинный зал',artist:'Томас Рейес',year:2025,category:'Фотография',medium:'Архивная пигментная печать',dim:'100 × 130 см',
+   desc:'Снято на рассвете внутри закрытого здания муниципалитета, отпечатано в архитектурном масштабе.'},
+  {id:'concrete-choir',title:'Бетонный хор',artist:'Томас Рейес',year:2024,category:'Фотография',medium:'Архивная пигментная печать',dim:'100 × 130 см',
+   desc:'Исследование бруталистской лестничной клетки, трактованной как музыкальная партитура повторяющихся форм.'},
+  {id:'skin-study-i',title:'Этюд кожи I',artist:'Елена Восс',year:2026,category:'Скульптура',medium:'Силикон, стальной каркас',dim:'60 × 40 × 35 см',
+   desc:'Первая из пяти фигур, созданных для «Цифрового человека», отлитая по данным motion capture.'},
+  {id:'skin-study-iii',title:'Этюд кожи III',artist:'Елена Восс',year:2026,category:'Скульптура',medium:'Силикон, стальной каркас',dim:'70 × 45 × 38 см',
+   desc:'Более поздняя, доработанная фигура из той же серии, покрытая косметическим пигментом.'},
+  {id:'household-monument-i',title:'Бытовой монумент I',artist:'Адаезе Нвосу',year:2026,category:'Скульптура',medium:'Литая бронза',dim:'80 × 50 × 50 см',
+   desc:'Отсканированный кухонный чайник, увеличенный вчетверо и отлитый в бронзе.'},
+  {id:'reclaimed-field',title:'Восстановленное поле',artist:'Studio Kleón',year:2025,category:'Фотография',medium:'Архивная пигментная печать',dim:'90 × 120 см',
+   desc:'Бывший горнодобывающий участок спустя четыре года после закрытия, снятый для «После природы».'},
+  {id:'mirror-corridor-study',title:'Этюд зеркального коридора',artist:'Noema Collective',category:'Инсталляция',year:2026,medium:'Зеркало, алюминий, LED',dim:'Переменные размеры',
+   desc:'Макет к «Точке схода», демонстрирующий систему наклонных зеркал в масштабе 1:10.'},
+  {id:'satellite-sky-ii',title:'Спутниковое небо II',artist:'Юки Танака',year:2025,category:'Живопись',medium:'Акрил, панель',dim:'100 × 100 см',
+   desc:'Данные ночного неба, переработанные в вихревую композицию в духе Ван Гога.'},
+  {id:'render-ghost',title:'Призрак рендера',artist:'Елена Восс',year:2026,category:'Цифровое искусство',medium:'Генеративный рендер, видео-петля',dim:'4K, петля 3 мин',
+   desc:'Недорендеренный проход фигуры «Цифрового человека», намеренно оставленный незавершённым.'},
+  {id:'point-cloud-portrait',title:'Портрет из точечного облака',artist:'Noema Collective',year:2025,category:'Цифровое искусство',medium:'3D-сканирование в реальном времени',dim:'Переменные размеры',
+   desc:'Живой портрет, непрерывно пересобираемый медленным сканером глубины.'},
+  {id:'field-notes-01',title:'Полевые заметки 01',artist:'Studio Kleón',year:2024,category:'Фотография',medium:'Желатиносеребряная печать',dim:'40 × 50 см',
+   desc:'Рабочий отпечаток из исследовательской поездки для «После природы», показан впервые.'},
+  {id:'threshold',title:'Порог',artist:'Noema Collective',year:2026,category:'Инсталляция',medium:'Сталь, стекло, датчик движения',dim:'240 × 120 × 120 см',
+   desc:'Дверной проём, который открывается только когда посетитель простоит неподвижно тридцать секунд.'},
+  {id:'low-tide',title:'Отлив',artist:'Ингрид Сорель',year:2022,category:'Живопись',medium:'Масло, лён',dim:'90 × 120 см',
+   desc:'Ранняя работа из серии «Побережье», написанная до того, как Сорель полностью отказалась от натурной фотографии.'},
+  {id:'archive-loop',title:'Архивная петля',artist:'Юки Танака',year:2026,category:'Цифровое искусство',medium:'Генеративная анимация',dim:'4K, петля 5 мин',
+   desc:'Генеративная переработка спутниковых данных о световом загрязнении в медленно движущееся ночное небо.'},
+];
+
+const TICKET_TYPES = [
+  {id:'adult',label:'Взрослый',price:20,note:'18–64 года'},
+  {id:'student',label:'Студенческий',price:12,note:'Нужен студенческий билет'},
+  {id:'child',label:'Детский (до 12 лет)',price:0,note:'В сопровождении взрослого'},
+  {id:'senior',label:'Пенсионный',price:15,note:'65 лет и старше'},
+  {id:'guided',label:'Билет с экскурсией',price:30,note:'Включает экскурсию 45 минут'},
+];
+
+const TIME_SLOTS = ['10:00','12:00','14:00','16:00','18:00'];
+
+const TEAM = [
+  {name:'Маргарита Адаон',role:'Основатель и директор'},
+  {name:'Илья Сарсенов',role:'Главный куратор'},
+  {name:'Нур Аль-Фадли',role:'Куратор фотографии'},
+  {name:'Петра Линдквист',role:'Руководитель выставочного отдела'},
+  {name:'Дамир Есенов',role:'Руководитель образовательных программ'},
+  {name:'Кьяра Бассано',role:'Хранитель фондов'},
+  {name:'Рави Чандрасекаран',role:'Руководитель дизайна'},
+  {name:'Айгерим Бекова',role:'Служба приёма посетителей'},
+];
+
+/* =================================================================
+   UTIL — deterministic generative art placeholders
+================================================================= */
+function hashStr(s){let h=0;for(let i=0;i<s.length;i++){h=(h<<5)-h+s.charCodeAt(i);h|=0;}return Math.abs(h)||1;}
+function rng(seed){let s=seed%2147483647;if(s<=0)s+=2147483646;return function(){s=s*16807%2147483647;return (s-1)/2147483646;};}
+
+function artSVG(id,opts={}){
+  const w=opts.w||480,h=opts.h||600;
+  const seed=hashStr(id+(opts.variant||''));
+  const rand=rng(seed);
+  const accent = opts.accent===true;
+  const strokeMain = accent ? 'var(--accent)' : 'var(--ink)';
+  const shade = 232 - Math.floor(rand()*16);
+  let shapes='';
+  const n = (opts.density||6) + Math.floor(rand()*5);
+  for(let i=0;i<n;i++){
+    const t=rand();
+    const op=(0.16+rand()*0.42).toFixed(2);
+    const sw=(0.6+rand()*1.3).toFixed(2);
+    if(t<0.38){
+      const cx=(rand()*w).toFixed(1),cy=(rand()*h).toFixed(1),r=(24+rand()*Math.min(w,h)*0.42).toFixed(1);
+      shapes+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${strokeMain}" stroke-width="${sw}" opacity="${op}"/>`;
+    } else if(t<0.72){
+      const x1=(rand()*w).toFixed(1),y1=(rand()*h).toFixed(1),x2=(rand()*w).toFixed(1),y2=(rand()*h).toFixed(1);
+      shapes+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${strokeMain}" stroke-width="${sw}" opacity="${op}"/>`;
+    } else {
+      const cx=rand()*w,cy=rand()*h,s2=30+rand()*90,rot=(rand()*360).toFixed(1);
+      shapes+=`<rect x="${(cx-s2/2).toFixed(1)}" y="${(cy-s2/2).toFixed(1)}" width="${s2.toFixed(1)}" height="${s2.toFixed(1)}" fill="none" stroke="${strokeMain}" stroke-width="${sw}" opacity="${op}" transform="rotate(${rot} ${cx.toFixed(1)} ${cy.toFixed(1)})"/>`;
+    }
+  }
+  const alt=(opts.alt||'Сгенерированная иллюстрация').replace(/"/g,'');
+  return `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${alt}">
+    <rect width="${w}" height="${h}" fill="rgb(${shade},${shade-2},${shade-7})"/>
+    ${shapes}
+  </svg>`;
+}
+
+function heroSVG(){
+  const rand=rng(hashStr('hero-portrait'));
+  let rings='';
+  for(let i=0;i<16;i++){
+    const r=40+i*17;
+    const op=(0.5-i*0.026).toFixed(2);
+    rings+=`<ellipse cx="240" cy="230" rx="${r*0.72}" ry="${r}" fill="none" stroke="var(--ink)" stroke-width="0.7" opacity="${op}"/>`;
+  }
+  let lines='';
+  for(let i=0;i<40;i++){
+    const y=60+i*9;
+    const x1=140+rand()*20, x2=340-rand()*20;
+    lines+=`<line x1="${x1.toFixed(1)}" y1="${y}" x2="${x2.toFixed(1)}" y2="${y}" stroke="var(--accent)" stroke-width="0.5" opacity="${(0.06+rand()*0.1).toFixed(2)}"/>`;
+  }
+  return `<svg viewBox="0 0 480 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Абстрактный генеративный портрет — иллюстрация в шапке сайта">
+    <rect width="480" height="600" fill="var(--paper-2)"/>
+    <rect width="480" height="600" fill="none"/>
+    ${lines}
+    ${rings}
+    <circle cx="240" cy="150" r="58" fill="none" stroke="var(--ink)" stroke-width="1"/>
+    <path d="M150 560 C150 420, 330 420, 330 560" fill="none" stroke="var(--ink)" stroke-width="1"/>
+  </svg>`;
+}
+
+function qrSVG(seed){
+  const rand=rng(hashStr(seed));
+  const size=17;
+  let cells='';
+  for(let y=0;y<size;y++){
+    for(let x=0;x<size;x++){
+      const corner=(x<4&&y<4)||(x>size-5&&y<4)||(x<4&&y>size-5);
+      const on = corner ? ((x%3===0)||(y%3===0)||(x===y)) : rand()>0.56;
+      if(on) cells+=`<rect x="${x}" y="${y}" width="1" height="1" fill="var(--ink)"/>`;
+    }
+  }
+  return `<svg viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Заглушка QR-кода">${cells}</svg>`;
+}
+
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+/* =================================================================
+   STATE
+================================================================= */
+const state={
+  route:'/',
+  gallery:{filter:'all',search:'',artist:'all',year:'all'},
+  events:{range:'all',type:'all',monthOffset:0},
+  reservedEvents:new Set(),
+  ticket:{
+    cart:{adult:0,student:0,child:0,senior:0,guided:0},
+    monthOffset:0,
+    date:null,
+    time:null,
+    step:1,
+    confirmed:null,
+  },
+};
+
+function cartCount(){return Object.values(state.ticket.cart).reduce((a,b)=>a+b,0);}
+function cartTotal(){return TICKET_TYPES.reduce((sum,t)=>sum+t.price*state.ticket.cart[t.id],0);}
+
+function isDateDisabled(d){
+  if(d<TODAY) return true;
+  if(d.getDay()===1) return true; // Monday closed
+  const h=hashStr('day'+iso(d));
+  return h%11===0; // occasional sold-out day
+}
+function isSlotDisabled(dateIso,slot){
+  const h=hashStr('slot'+dateIso+slot);
+  return h%5===0;
+}
+
+/* =================================================================
+   NAV
+================================================================= */
+const NAV_ITEMS=[
+  {route:'/exhibitions',label:'Выставки'},
+  {route:'/gallery',label:'Галерея'},
+  {route:'/events',label:'События'},
+  {route:'/visit',label:'Посещение'},
+  {route:'/about',label:'О музее'},
+  {route:'/contact',label:'Контакты'},
+];
+function renderNav(){
+  const topRoute='/'+(location.hash.slice(2).split('/')[0]||'');
+  const linkHtml=(it)=>`<a href="#${it.route}" data-action="nav" data-route="${it.route}" class="${topRoute===it.route?'active':''}">${it.label}</a>`;
+  document.getElementById('navLinks').innerHTML=NAV_ITEMS.map(linkHtml).join('');
+  document.getElementById('mobileMenu').innerHTML=NAV_ITEMS.map(linkHtml).join('')+`<a href="#/tickets" data-action="nav" data-route="/tickets" class="${topRoute==='/tickets'?'active':''}">Купить билеты</a>`;
+}
+
+/* =================================================================
+   SHARED COMPONENTS
+================================================================= */
+function badgeFor(status){
+  if(status==='current') return `<span class="badge is-current">Сейчас проходит</span>`;
+  if(status==='upcoming') return `<span class="badge is-upcoming">Скоро</span>`;
+  return `<span class="badge">Прошедшая</span>`;
+}
+function exhibitionCard(e){
+  return `<article class="ex-card" data-action="nav" data-route="/exhibitions/${e.id}" style="cursor:pointer">
+    <div class="ex-card-media">${artSVG(e.id,{w:480,h:600,alt:e.title+' by '+e.artist})}</div>
+    <div class="ex-card-body">
+      ${badgeFor(e.status)}
+      <div class="ex-card-title">${esc(e.title)}</div>
+      <div class="ex-card-meta">${esc(e.artist)} · ${esc(e.category)}<br>${esc(e.dateLabel)} · ${esc(e.location)}</div>
+      <div class="ex-card-desc">${esc(e.short)}</div>
+      <div class="ex-card-foot"><span class="btn-ghost">Подробнее</span></div>
+    </div>
+  </article>`;
+}
+function eventCard(ev){
+  const reserved=state.reservedEvents.has(ev.id);
+  const seatsLeft=ev.seatsLeft-(reserved?1:0);
+  return `<article class="event-card" data-action="nav" data-route="/events/${ev.id}" style="cursor:pointer">
+    <span class="event-tag">${esc(ev.typeLabel)}</span>
+    <div class="event-date">
+      <span class="event-day">${fmtShort(ev.date)}</span>
+      <span class="event-monthtime">${ev.date.toLocaleDateString('ru-RU',{weekday:'long'})}<br>${ev.time} · ${ev.duration}</span>
+    </div>
+    <div class="event-title">${esc(ev.title)}</div>
+    <div class="event-desc">${esc(ev.desc)}</div>
+    <div class="small-note">${seatsLeft>0?'Осталось мест: '+seatsLeft:'Мест нет'}</div>
+    <div><span class="btn-ghost">Подробнее</span></div>
+  </article>`;
+}
+function artCard(a){
+  return `<article class="art-card" data-action="nav" data-route="/gallery/${a.id}">
+    <div class="art-card-media">${artSVG(a.id,{w:360,h:480,alt:a.title+' by '+a.artist})}</div>
+    <div class="art-card-body">
+      <div class="art-card-title">${esc(a.title)}</div>
+      <div class="art-card-meta">${esc(a.artist)} · ${a.year} · ${esc(a.category)}</div>
+    </div>
+  </article>`;
+}
+
+/* =================================================================
+   PAGE: HOME
+================================================================= */
+function pageHome(){
+  const current=EXHIBITIONS.filter(e=>e.status==='current').slice(0,3);
+  const upcomingEvents=[...EVENTS].sort((a,b)=>a.date-b.date).slice(0,3);
+  return `
+  <div class="container">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">AA — МУЗЕЙ ИСКУССТВ</span>
+        <h1 class="hero-title">Искусство<br>будущего</h1>
+        <p class="hero-desc">Место, где искусство встречает завтра. Музей о живых художниках, движущемся образе и вопросах, которые здесь и сейчас поднимает современное искусство.</p>
+        <div class="hero-ctas">
+          <a class="btn" href="#/tickets" data-action="nav" data-route="/tickets">Купить билеты</a>
+          <a class="btn-ghost" href="#/exhibitions" data-action="nav" data-route="/exhibitions">Смотреть выставки →</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="tilt-wrap">${HERO_IMAGE?`<img src="${HERO_IMAGE}" alt="AA Музей искусств — иллюстрация в шапке">`:heroSVG()}</div>
+        <div class="glare"></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="section" style="padding-top:20px">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Текущие выставки</h2>
+        <p class="section-sub">Три выставки прямо сейчас — скульптура, фотография и живопись.</p>
+      </div>
+      <div class="grid cols-3">${current.map(exhibitionCard).join('')}</div>
+    </div>
+  </section>
+
+  <section class="section section-tight" style="background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Ближайшие события</h2>
+        <a class="btn-ghost" href="#/events" data-action="nav" data-route="/events">Все события →</a>
+      </div>
+      <div class="grid cols-3">${upcomingEvents.map(eventCard).join('')}</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap">
+      <div>
+        <h2 class="section-title">Спланируйте визит</h2>
+        <p class="section-sub" style="margin-top:10px">Открыты со вторника по воскресенье, 10:00 — 20:00. Понедельник — выходной.</p>
+      </div>
+      <a class="btn btn-outline" href="#/visit" data-action="nav" data-route="/visit">Информация для посетителей →</a>
+    </div>
+  </section>
+  `;
+}
+
+/* =================================================================
+   PAGE: EXHIBITIONS LIST
+================================================================= */
+function pageExhibitions(){
+  const groups=[['current','Текущие'],['upcoming','Скоро'],['past','Прошедшие']];
+  return `
+  <div class="container">
+    <div class="section-tight">
+      <span class="eyebrow">ВЫСТАВКИ</span>
+      <h1 class="section-title" style="margin-top:10px">Сейчас и скоро</h1>
+    </div>
+    ${groups.map(([key,label])=>{
+      const list=EXHIBITIONS.filter(e=>e.status===key);
+      if(!list.length) return '';
+      return `<div style="margin-bottom:68px">
+        <h3 style="font-size:15px;font-style:normal;font-family:var(--sans);font-weight:700;letter-spacing:.03em;color:var(--ink-soft);margin-bottom:22px">${label.toUpperCase()}</h3>
+        <div class="grid cols-3">${list.map(exhibitionCard).join('')}</div>
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+
+/* =================================================================
+   PAGE: EXHIBITION DETAIL
+================================================================= */
+function pageExhibitionDetail(id){
+  const e=EXHIBITIONS.find(x=>x.id===id);
+  if(!e) return page404();
+  const related=EVENTS.filter(ev=>ev.relatedExhibition===id).slice(0,2);
+  return `
+  <div class="detail-hero">${artSVG(e.id,{w:1400,h:700,density:9,alt:e.title})}</div>
+  <div class="container">
+    <div class="detail-head">
+      <div>
+        ${badgeFor(e.status)}
+        <h1 class="detail-title" style="margin-top:14px">${esc(e.title)}</h1>
+        <p style="margin-top:10px;color:var(--ink-soft);font-size:16px">${esc(e.artist)} · ${esc(e.category)}</p>
+      </div>
+      <a class="btn" href="#/tickets" data-action="nav" data-route="/tickets">Забронировать визит</a>
+    </div>
+
+    <div class="detail-meta-row">
+      <div class="detail-meta-item"><span class="eyebrow">ДАТЫ</span><div>${esc(e.dateLabel)}</div></div>
+      <div class="detail-meta-item"><span class="eyebrow">ЗАЛ</span><div>${esc(e.location)}</div></div>
+      <div class="detail-meta-item"><span class="eyebrow">ЧАСЫ РАБОТЫ</span><div>${esc(e.hours)}</div></div>
+    </div>
+
+    <div class="detail-body">
+      <div>
+        <div class="detail-desc">${e.long.map(p=>`<p>${esc(p)}</p>`).join('')}</div>
+        <div class="thumbrow">
+          ${[1,2,3,4].map(i=>`<div>${artSVG(e.id+'-thumb-'+i,{w:300,h:300,alt:e.title+' detail view '+i})}</div>`).join('')}
+        </div>
+      </div>
+      <div>
+        <div class="side-box">
+          <h4>Художник</h4>
+          <p style="color:var(--ink-soft);font-size:14px;line-height:1.6">${esc(e.artist)} представляет в этой экспозиции новые работы, созданные специально для AA.</p>
+        </div>
+        ${related.length?`<div class="side-box">
+          <h4>Связанные события</h4>
+          ${related.map(r=>`<a href="#/events/${r.id}" data-action="nav" data-route="/events/${r.id}" style="display:block;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px">
+            <strong style="font-family:var(--serif);font-style:italic;display:block;font-size:15px">${esc(r.title)}</strong>
+            <span style="color:var(--ink-soft);font-size:12.5px">${fmtShort(r.date)} · ${r.time}</span>
+          </a>`).join('')}
+        </div>`:''}
+      </div>
+    </div>
+  </div>
+  <div style="height:70px"></div>
+  `;
+}
+
+/* =================================================================
+   PAGE: EVENTS LIST + CALENDAR
+================================================================= */
+function eventsMonthDate(){const d=new Date(TODAY);d.setMonth(d.getMonth()+state.events.monthOffset);d.setDate(1);return d;}
+function renderMiniCalendar(){
+  const monthDate=eventsMonthDate();
+  const y=monthDate.getFullYear(),m=monthDate.getMonth();
+  const first=new Date(y,m,1);
+  const startDow=(first.getDay()+6)%7; // Mon=0
+  const daysInMonth=new Date(y,m+1,0).getDate();
+  const eventDates=new Set(EVENTS.map(ev=>iso(ev.date)));
+  let cells='';
+  for(let i=0;i<startDow;i++) cells+=`<div class="cal-day empty"></div>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const dateObj=new Date(y,m,d);
+    const has=eventDates.has(iso(dateObj));
+    cells+=`<div class="cal-day${has?'':''}" style="cursor:${has?'pointer':'default'};${has?'font-weight:700':'color:var(--ink-faint)'}" ${has?`data-action="pickEventDate" data-date="${iso(dateObj)}"`:''}>${d}${has?'<span style=\"position:absolute;bottom:6px;width:5px;height:5px;background:var(--accent);border-radius:50%\"></span>':''}</div>`;
+  }
+  const dows=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+  return `<div class="cal-nav">
+      <button data-action="eventsMonth" data-dir="-1" aria-label="Предыдущий месяц">←</button>
+      <span class="cal-month">${monthDate.toLocaleDateString('ru-RU',{month:'long',year:'numeric'})}</span>
+      <button data-action="eventsMonth" data-dir="1" aria-label="Следующий месяц">→</button>
+    </div>
+    <div class="cal-grid">${dows.map(d=>`<div class="cal-dow">${d}</div>`).join('')}${cells}</div>
+    <p class="small-note">Точками отмечены дни с событиями. Нажмите на дату, чтобы перейти к списку ниже.</p>`;
+}
+function pageEvents(){
+  const {range,type}=state.events;
+  let list=[...EVENTS].sort((a,b)=>a.date-b.date);
+  if(range==='today') list=list.filter(e=>iso(e.date)===iso(TODAY));
+  else if(range==='week') list=list.filter(e=>e.date>=TODAY && e.date<=addDays(TODAY,7));
+  else if(range==='month') list=list.filter(e=>e.date>=TODAY && e.date<=addDays(TODAY,30));
+  if(type!=='all') list=list.filter(e=>e.type===type);
+
+  const rangeChips=[['all','Все даты'],['today','Сегодня'],['week','На этой неделе'],['month','В этом месяце']];
+  const typeChips=[['all','Все типы'],['talk','Лекции'],['workshop','Мастер-классы'],['tour','Экскурсии'],['screening','Показы']];
+
+  return `
+  <div class="container">
+    <div class="section-tight">
+      <span class="eyebrow">СОБЫТИЯ</span>
+      <h1 class="section-title" style="margin-top:10px">Лекции, экскурсии и показы</h1>
+    </div>
+
+    <div class="detail-body" style="align-items:start">
+      <div>
+        <div class="filterbar">${rangeChips.map(([k,l])=>`<button class="chip ${range===k?'active':''}" data-action="setEventsRange" data-val="${k}">${l}</button>`).join('')}</div>
+        <div class="filterbar">${typeChips.map(([k,l])=>`<button class="chip ${type===k?'active':''}" data-action="setEventsType" data-val="${k}">${l}</button>`).join('')}</div>
+        ${list.length?`<div class="grid cols-3" id="eventsList">${list.map(eventCard).join('')}</div>`:`<div class="empty-state">Под эти фильтры ничего не подходит. Попробуйте изменить условия.</div>`}
+      </div>
+      <div>
+        <div class="side-box">${renderMiniCalendar()}</div>
+      </div>
+    </div>
+  </div>
+  <div style="height:60px"></div>
+  `;
+}
+
+/* =================================================================
+   PAGE: EVENT DETAIL
+================================================================= */
+function pageEventDetail(id){
+  const ev=EVENTS.find(x=>x.id===id);
+  if(!ev) return page404();
+  const reserved=state.reservedEvents.has(id);
+  const seatsLeft=ev.seatsLeft-(reserved?1:0);
+  const soldOut=seatsLeft<=0;
+  return `
+  <div class="detail-hero">${artSVG(ev.id,{w:1400,h:700,density:7,accent:true,alt:ev.title})}</div>
+  <div class="container">
+    <div class="detail-head">
+      <div>
+        <span class="event-tag">${esc(ev.typeLabel)}</span>
+        <h1 class="detail-title" style="margin-top:14px">${esc(ev.title)}</h1>
+      </div>
+    </div>
+    <div class="detail-meta-row">
+      <div class="detail-meta-item"><span class="eyebrow">ДАТА</span><div>${fmtLong(ev.date)}</div></div>
+      <div class="detail-meta-item"><span class="eyebrow">ВРЕМЯ</span><div>${ev.time} · ${ev.duration}</div></div>
+      <div class="detail-meta-item"><span class="eyebrow">ЗАЛ</span><div>${esc(ev.location)}</div></div>
+      <div class="detail-meta-item"><span class="eyebrow">МЕСТА</span><div id="seatsLeftLabel">${soldOut?'Мест нет':'Свободно: '+seatsLeft}</div></div>
+    </div>
+    <div class="detail-body">
+      <div class="detail-desc"><p>${esc(ev.desc)}</p><p>Событие включено в стоимость обычного билета, если не указано иное. Приходите за десять минут — места не нумерованы.</p></div>
+      <div>
+        <div class="side-box">
+          <h4>Забронировать место</h4>
+          <p style="font-size:13.5px;color:var(--ink-soft);margin-bottom:18px">${soldOut?'Мест на это событие больше нет. Загляните позже — возможно, появятся новые даты.':'Бронь удерживает одно место. Детали подтвердите на входе.'}</p>
+          <button class="btn btn-block" id="reserveBtn" data-action="reserveEvent" data-id="${ev.id}" ${soldOut||reserved?'disabled':''}>${reserved?'Забронировано ✓':(soldOut?'Мест нет':'Забронировать место')}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="height:70px"></div>
+  `;
+}
+
+/* =================================================================
+   PAGE: GALLERY
+================================================================= */
+function pageGallery(){
+  const {filter,search,artist,year}=state.gallery;
+  const categories=['all','Живопись','Скульптура','Фотография','Цифровое искусство','Инсталляция'];
+  const artists=['all',...new Set(ARTWORKS.map(a=>a.artist))];
+  const years=['all',...[...new Set(ARTWORKS.map(a=>a.year))].sort((a,b)=>b-a)];
+  let list=ARTWORKS.filter(a=>{
+    if(filter!=='all' && a.category!==filter) return false;
+    if(artist!=='all' && a.artist!==artist) return false;
+    if(year!=='all' && String(a.year)!==String(year)) return false;
+    if(search && !(a.title.toLowerCase().includes(search.toLowerCase())||a.artist.toLowerCase().includes(search.toLowerCase()))) return false;
+    return true;
+  });
+  return `
+  <div class="container">
+    <div class="section-tight" style="padding-bottom:36px">
+      <span class="brand-mark" style="font-size:34px">AA</span>
+      <h1 class="section-title" style="margin-top:14px">Галерея</h1>
+    </div>
+    <div class="gallery-layout">
+      <aside class="gallery-side">
+        <div class="gallery-side-title">ВСЕ РАБОТЫ</div>
+        <ul class="gallery-cat-list">
+          ${categories.filter(c=>c!=='all').map(c=>`<li><button type="button" data-action="setGalleryFilter" data-val="${c}" class="${filter===c?'active':''}">${c}</button></li>`).join('')}
+        </ul>
+        ${filter!=='all'?`<button class="btn-ghost" data-action="setGalleryFilter" data-val="all" style="margin-top:4px">Сбросить фильтр</button>`:''}
+        <div class="gallery-side-title" style="margin-top:34px">ПОИСК</div>
+        <input class="search-input" id="gallerySearch" type="text" placeholder="Название или автор…" value="${esc(search)}" data-action-input="gallerySearch">
+        <div class="gallery-side-title" style="margin-top:28px">ФИЛЬТР +</div>
+        <label style="display:block;font-size:12px;color:var(--ink-soft);margin:12px 0 6px">Автор</label>
+        <select class="select-input" style="width:100%" data-action-input="galleryArtist">
+          ${artists.map(a=>`<option value="${esc(a)}" ${artist===a?'selected':''}>${a==='all'?'Все авторы':esc(a)}</option>`).join('')}
+        </select>
+        <label style="display:block;font-size:12px;color:var(--ink-soft);margin:16px 0 6px">Год</label>
+        <select class="select-input" style="width:100%" data-action-input="galleryYear">
+          ${years.map(y=>`<option value="${esc(String(y))}" ${String(year)===String(y)?'selected':''}>${y==='all'?'Все годы':y}</option>`).join('')}
+        </select>
+        <p class="small-note">Показано ${list.length} из ${ARTWORKS.length} работ</p>
+      </aside>
+      <div class="gallery-main">
+        ${list.length?`<div class="grid cols-3">${list.map(artCard).join('')}</div>`:`<div class="empty-state">По запросу ничего не найдено. Попробуйте сбросить фильтр.</div>`}
+      </div>
+    </div>
+  </div>
+  <div style="height:60px"></div>
+  `;
+}
+
+/* =================================================================
+   PAGE: ARTWORK DETAIL
+================================================================= */
+function pageArtworkDetail(id){
+  const a=ARTWORKS.find(x=>x.id===id);
+  if(!a) return page404();
+  const related=ARTWORKS.filter(x=>x.category===a.category && x.id!==a.id).slice(0,3);
+  return `
+  <div class="container">
+    <div class="section-tight">
+      <div class="detail-body">
+        <div style="aspect-ratio:3/4;border:1px solid var(--line);overflow:hidden">${artSVG(a.id,{w:600,h:800,density:8,alt:a.title})}</div>
+        <div>
+          <span class="eyebrow">${esc(a.category).toUpperCase()}</span>
+          <h1 class="detail-title" style="margin-top:10px">${esc(a.title)}</h1>
+          <p style="margin-top:8px;color:var(--ink-soft);font-size:16px">${esc(a.artist)}, ${a.year}</p>
+          <div class="hr" style="margin:26px 0"></div>
+          <div style="display:flex;gap:40px;margin-bottom:26px">
+            <div><span class="eyebrow">МАТЕРИАЛ</span><div style="margin-top:6px;font-size:14.5px">${esc(a.medium)}</div></div>
+            <div><span class="eyebrow">РАЗМЕР</span><div style="margin-top:6px;font-size:14.5px">${esc(a.dim)}</div></div>
+          </div>
+          <p style="font-size:15.5px;line-height:1.7;color:var(--ink-soft)">${esc(a.desc)}</p>
+        </div>
+      </div>
+    </div>
+    ${related.length?`<div class="section-tight" style="padding-top:20px">
+      <h3 style="font-size:15px;font-style:normal;font-family:var(--sans);font-weight:700;letter-spacing:.03em;color:var(--ink-soft);margin-bottom:18px">ПОХОЖИЕ РАБОТЫ</h3>
+      <div class="related-strip">${related.map(artCard).join('')}</div>
+    </div>`:''}
+  </div>
+  <div style="height:60px"></div>
+  `;
+}
+
+/* =================================================================
+   PAGE: VISIT
+================================================================= */
+function pageVisit(){
+  return `
+  <div class="container">
+    <div class="section-tight">
+      <span class="eyebrow">ПОСЕЩЕНИЕ</span>
+      <h1 class="section-title" style="margin-top:10px">Спланируйте визит</h1>
+    </div>
+    <div class="detail-body">
+      <div>
+        <table class="hours-table">
+          <tr><td>Вторник — пятница</td><td>10:00 — 20:00</td></tr>
+          <tr><td>Суббота — воскресенье</td><td>10:00 — 20:00</td></tr>
+          <tr><td>Понедельник</td><td>Выходной</td></tr>
+        </table>
+        <div class="hr" style="margin:30px 0"></div>
+        <h4 style="font-size:17px;margin-bottom:12px">Как добраться</h4>
+        <p style="color:var(--ink-soft);font-size:14.5px;line-height:1.7;margin-bottom:22px">На метро — семь минут пешком от станции «Абай». Автобусы №12, 47 и 63 останавливаются прямо у главного входа на улице Абая. Уличная парковка ограничена; ближайшая платная стоянка — в 200 м к северу, на Кабанбай батыра.</p>
+        <h4 style="font-size:17px;margin-bottom:12px">Доступная среда</h4>
+        <p style="color:var(--ink-soft);font-size:14.5px;line-height:1.7;margin-bottom:22px">Вход без порогов, лифты на все этажи, доступные санузлы на каждом уровне, инвалидные коляски — на стойке администратора по запросу.</p>
+        <h4 style="font-size:17px;margin-bottom:12px">Рекомендуемая продолжительность</h4>
+        <p style="color:var(--ink-soft);font-size:14.5px;line-height:1.7">Обычно на осмотр текущих выставок уходит 1,5–2,5 часа. Добавьте 45 минут на экскурсию с гидом.</p>
+      </div>
+      <div>
+        <div class="map-box">
+          <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" role="img" aria-label="Схематичная карта с расположением музея">
+            <rect width="400" height="260" fill="var(--paper-2)"/>
+            <line x1="0" y1="80" x2="400" y2="80" stroke="var(--line-strong)" stroke-width="1"/>
+            <line x1="0" y1="180" x2="400" y2="180" stroke="var(--line-strong)" stroke-width="1"/>
+            <line x1="120" y1="0" x2="120" y2="260" stroke="var(--line-strong)" stroke-width="1"/>
+            <line x1="280" y1="0" x2="280" y2="260" stroke="var(--line-strong)" stroke-width="1"/>
+            <circle cx="200" cy="130" r="7" fill="var(--accent)"/>
+            <text x="212" y="134" font-size="11" fill="var(--ink)" font-family="Instrument Sans">AA Museum · Абая 77</text>
+          </svg>
+        </div>
+        <p class="small-note">Схема условна и приведена только для ориентира.</p>
+        <div class="side-box" style="margin-top:22px">
+          <h4>Кафе и магазин</h4>
+          <p style="font-size:13.5px;color:var(--ink-soft);line-height:1.6">Наше кафе на первом этаже подаёт кофе и лёгкие блюда до 19:30. В музейном магазине — каталоги выставок, авторские издания и локальные товары; часы работы совпадают с музеем.</p>
+        </div>
+        <a class="btn btn-block" style="margin-top:22px" href="#/tickets" data-action="nav" data-route="/tickets">Купить билеты</a>
+      </div>
+    </div>
+  </div>
+  <div style="height:60px"></div>
+  `;
+}
+
+/* =================================================================
+   PAGE: TICKETS (booking wizard)
+================================================================= */
+function ticketMonthDate(){const d=new Date(TODAY);d.setMonth(d.getMonth()+state.ticket.monthOffset);d.setDate(1);return d;}
+function renderBookingCalendar(){
+  const monthDate=ticketMonthDate();
+  const y=monthDate.getFullYear(),m=monthDate.getMonth();
+  const first=new Date(y,m,1);
+  const startDow=(first.getDay()+6)%7;
+  const daysInMonth=new Date(y,m+1,0).getDate();
+  let cells='';
+  for(let i=0;i<startDow;i++) cells+=`<div class="cal-day empty"></div>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const dateObj=new Date(y,m,d);
+    const dIso=iso(dateObj);
+    const disabled=isDateDisabled(dateObj);
+    const selected=state.ticket.date===dIso;
+    cells+=`<div class="cal-day ${disabled?'disabled':''} ${selected?'selected':''}" ${disabled?'':`data-action="pickDate" data-date="${dIso}"`}>${d}</div>`;
+  }
+  const dows=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+  const canPrev=state.ticket.monthOffset>0;
+  return `<div class="cal-nav">
+      <button data-action="ticketMonth" data-dir="-1" ${canPrev?'':'disabled'} aria-label="Предыдущий месяц">←</button>
+      <span class="cal-month">${monthDate.toLocaleDateString('ru-RU',{month:'long',year:'numeric'})}</span>
+      <button data-action="ticketMonth" data-dir="1" aria-label="Следующий месяц">→</button>
+    </div>
+    <div class="cal-grid">${dows.map(d=>`<div class="cal-dow">${d}</div>`).join('')}${cells}</div>
+    <p class="small-note">По понедельникам закрыто. На некоторые даты билеты уже раскуплены.</p>`;
+}
+function renderSlotGrid(){
+  if(!state.ticket.date) return `<p class="small-note">Выберите дату, чтобы увидеть доступное время.</p>`;
+  return `<div class="slot-grid">${TIME_SLOTS.map(s=>{
+    const disabled=isSlotDisabled(state.ticket.date,s);
+    const selected=state.ticket.time===s;
+    return `<button class="slot-btn ${disabled?'disabled':''} ${selected?'selected':''}" ${disabled?'disabled':`data-action="pickTime" data-time="${s}"`}>${s}${disabled?'<br><span style=\"font-size:10.5px\">Занято</span>':''}</button>`;
+  }).join('')}</div>`;
+}
+function stepStatus(n){
+  const cur=state.ticket.step;
+  if(n<cur) return 'done';
+  if(n===cur) return 'active';
+  return '';
+}
+function pageTickets(){
+  if(state.ticket.confirmed) return pageConfirmation();
+  const {cart,date,time,step}=state.ticket;
+  const total=cartTotal();
+  const count=cartCount();
+  const canStep2=count>0;
+  const canStep3=!!date;
+  const canStep4=!!time;
+
+  const summaryHTML=`<div class="summary-box">
+      <h4 style="font-size:17px;margin-bottom:18px">Ваш визит</h4>
+      ${date?`<div class="summary-line"><span>Дата</span><span>${fmtLong(new Date(date+'T00:00:00'))}</span></div>`:''}
+      ${time?`<div class="summary-line"><span>Время</span><span>${time}</span></div>`:''}
+      ${TICKET_TYPES.filter(t=>cart[t.id]>0).map(t=>`<div class="summary-line"><span>${cart[t.id]} × ${esc(t.label)}</span><span>$${t.price*cart[t.id]}</span></div>`).join('')}
+      ${count===0?`<p class="small-note">Добавьте билеты, чтобы продолжить.</p>`:''}
+      <div class="summary-total"><span>Итого</span><span>$${total}</span></div>
+    </div>`;
+
+  let stepBody='';
+  if(step===1){
+    stepBody=`<h3 style="font-size:22px;margin-bottom:22px">1. Выберите билеты</h3>
+      ${TICKET_TYPES.map(t=>`<div class="ticket-row">
+        <div>
+          <div class="ticket-name">${esc(t.label)}</div>
+          <div class="ticket-price">${t.price===0?'Бесплатно':'$'+t.price} · ${esc(t.note)}</div>
+        </div>
+        <div class="qty-control">
+          <button data-action="qtyDec" data-id="${t.id}" ${cart[t.id]===0?'disabled':''} aria-label="Уменьшить">−</button>
+          <span class="qty-num">${cart[t.id]}</span>
+          <button data-action="qtyInc" data-id="${t.id}" aria-label="Увеличить">+</button>
+        </div>
+      </div>`).join('')}
+      <div style="margin-top:32px;display:flex;justify-content:flex-end">
+        <button class="btn" data-action="ticketNext" data-step="2" ${canStep2?'':'disabled'}>Далее: дата и время →</button>
+      </div>`;
+  } else if(step===2){
+    stepBody=`<h3 style="font-size:22px;margin-bottom:22px">2. Выберите дату</h3>
+      ${renderBookingCalendar()}
+      <h3 style="font-size:22px;margin:36px 0 8px">3. Выберите время</h3>
+      ${renderSlotGrid()}
+      <div style="margin-top:32px;display:flex;justify-content:space-between">
+        <button class="btn-ghost" data-action="ticketNext" data-step="1">← Назад</button>
+        <button class="btn" data-action="ticketNext" data-step="3" ${canStep3&&canStep4?'':'disabled'}>Далее: ваши данные →</button>
+      </div>`;
+  } else if(step===3){
+    stepBody=`<h3 style="font-size:22px;margin-bottom:22px">4. Ваши данные</h3>
+      <form id="checkoutForm" novalidate>
+        <div class="form-row" id="row-name"><label for="ckName">Полное имя</label><input id="ckName" type="text" placeholder="Иван Иванов"><div class="err-msg">Пожалуйста, введите имя и фамилию.</div></div>
+        <div class="form-two">
+          <div class="form-row" id="row-email"><label for="ckEmail">Email</label><input id="ckEmail" type="email" placeholder="ivan@email.com"><div class="err-msg">Пожалуйста, введите корректный email.</div></div>
+          <div class="form-row" id="row-phone"><label for="ckPhone">Номер телефона</label><input id="ckPhone" type="tel" placeholder="+7 700 000 00 00"><div class="err-msg">Пожалуйста, введите номер телефона.</div></div>
+        </div>
+        <div style="margin-top:26px;display:flex;justify-content:space-between">
+          <button type="button" class="btn-ghost" data-action="ticketNext" data-step="2">← Назад</button>
+          <button type="submit" class="btn">Перейти к оплате →</button>
+        </div>
+      </form>`;
+  }
+
+  return `
+  <div class="container">
+    <div class="section-tight" style="padding-bottom:0">
+      <span class="eyebrow">БИЛЕТЫ</span>
+      <h1 class="section-title" style="margin-top:10px">Забронируйте визит</h1>
+    </div>
+    <div class="steps-track" style="margin-top:36px">
+      <div class="step-pill ${stepStatus(1)}"><span>01</span>Билеты</div>
+      <div class="step-pill ${stepStatus(2)}"><span>02</span>Дата и время</div>
+      <div class="step-pill ${stepStatus(3)}"><span>03</span>Ваши данные</div>
+    </div>
+    <div class="detail-body">
+      <div>${stepBody}</div>
+      <div>${summaryHTML}</div>
+    </div>
+  </div>
+  <div style="height:70px"></div>
+  `;
+}
+function pageConfirmation(){
+  const c=state.ticket.confirmed;
+  return `
+  <div class="container">
+    <div class="confirm-box">
+      <span class="eyebrow">БРОНЬ ПОДТВЕРЖДЕНА</span>
+      <h1 class="section-title" style="margin-top:14px">Ждём вас в AA</h1>
+      <p style="color:var(--ink-soft);margin-top:14px">Подтверждение отправлено на ${esc(c.email)}. Покажите номер брони на стойке при входе.</p>
+      <div class="confirm-id">${esc(c.bookingId)}</div>
+      <div class="confirm-qr">${qrSVG(c.bookingId)}</div>
+      <div style="text-align:left;max-width:420px;margin:0 auto">
+        <div class="confirm-detail-row"><span>Посетитель</span><span>${esc(c.name)}</span></div>
+        <div class="confirm-detail-row"><span>Дата визита</span><span>${fmtLong(new Date(c.date+'T00:00:00'))}</span></div>
+        <div class="confirm-detail-row"><span>Время визита</span><span>${c.time}</span></div>
+        <div class="confirm-detail-row"><span>Билетов</span><span>${c.count}</span></div>
+        <div class="confirm-detail-row"><span>Оплачено</span><span>$${c.total}</span></div>
+      </div>
+      <div style="margin-top:38px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap">
+        <a class="btn" href="#/" data-action="nav" data-route="/">На главную</a>
+        <button class="btn-outline" data-action="newBooking">Забронировать ещё</button>
+      </div>
+    </div>
+  </div>
+  `;
+}
+
+/* =================================================================
+   PAGE: ABOUT
+================================================================= */
+function pageAbout(){
+  return `
+  <div class="container">
+    <div class="section-tight">
+      <span class="eyebrow">О МУЗЕЕ</span>
+      <h1 class="section-title" style="margin-top:10px;font-size:clamp(30px,5vw,58px)">Пространство<br>для идей, искусства<br>и будущего.</h1>
+    </div>
+    <div class="detail-body">
+      <div class="detail-desc">
+        <p>AA — Музей искусств основан в 2016 году как дом для художников, работающих на границе своего медиума — там, где живопись встречается с данными, скульптура — со сканером, а фотография — с памятью.</p>
+        <p>Мы собираем и заказываем работы почти исключительно у ныне живущих художников, воспринимая музей как площадку для непрерывного диалога, а не застывший архив. Примерно треть наших залов обновляется каждый сезон.</p>
+        <p>Само здание — бывший текстильный склад, бетонные конструкции которого во многом оставлены открытыми. Наша архитектурная команда добилась того, чтобы дневной свет менял восприятие работ в течение дня.</p>
+        <p>Наша миссия проста: удерживать современное искусство в диалоге с теми, кто видит его впервые, не разжёвывая работу и не недооценивая зрителя.</p>
+      </div>
+      <div class="side-box">
+        <h4>Коротко о музее</h4>
+        <div class="summary-line"><span>Основан</span><span>2016</span></div>
+        <div class="summary-line"><span>Залов</span><span>4</span></div>
+        <div class="summary-line"><span>Посетителей в год</span><span>~180 000</span></div>
+        <div class="summary-line" style="border-bottom:none"><span>Ныне живущих художников</span><span>92%</span></div>
+      </div>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <h3 style="font-size:15px;font-style:normal;font-family:var(--sans);font-weight:700;letter-spacing:.03em;color:var(--ink-soft);margin-bottom:22px">КУРАТОРЫ И КОМАНДА</h3>
+      <div class="team-grid">
+        ${TEAM.map(p=>`<div class="team-card">
+          <div class="team-avatar">${artSVG('avatar-'+p.name,{w:300,h:300,density:4,alt:p.name})}</div>
+          <div class="team-name">${esc(p.name)}</div>
+          <div class="team-role">${esc(p.role)}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </section>
+  `;
+}
+
+/* =================================================================
+   PAGE: CONTACT
+================================================================= */
+function pageContact(){
+  return `
+  <div class="container">
+    <div class="section-tight">
+      <span class="eyebrow">КОНТАКТЫ</span>
+      <h1 class="section-title" style="margin-top:10px">Свяжитесь с нами</h1>
+    </div>
+    <div class="detail-body">
+      <div>
+        <form id="contactForm" novalidate>
+          <div class="form-row" id="row-cname"><label for="cName">Имя</label><input id="cName" type="text" placeholder="Ваше имя"><div class="err-msg">Пожалуйста, введите имя.</div></div>
+          <div class="form-row" id="row-cemail"><label for="cEmail">Email</label><input id="cEmail" type="email" placeholder="you@email.com"><div class="err-msg">Пожалуйста, введите корректный email.</div></div>
+          <div class="form-row" id="row-csubject"><label for="cSubject">Тема</label><input id="cSubject" type="text" placeholder="О чём хотите написать?"><div class="err-msg">Пожалуйста, укажите тему.</div></div>
+          <div class="form-row" id="row-cmessage"><label for="cMessage">Сообщение</label><textarea id="cMessage" rows="6" placeholder="Напишите сообщение…"></textarea><div class="err-msg">Пожалуйста, напишите сообщение.</div></div>
+          <button type="submit" class="btn">Отправить сообщение</button>
+          <p class="small-note" id="contactSuccess" style="display:none;color:var(--accent)">Сообщение отправлено — ответим в течение двух рабочих дней.</p>
+        </form>
+      </div>
+      <div>
+        <div class="side-box">
+          <h4>Приходите к нам</h4>
+          <p style="font-size:14px;color:var(--ink-soft);line-height:1.7">Алматы, ул. Абая 77, Казахстан</p>
+        </div>
+        <div class="side-box">
+          <h4>Контакты</h4>
+          <p style="font-size:14px;color:var(--ink-soft);line-height:1.7">aamuseum@gmail.com<br>+7 747 (354) 68-35</p>
+        </div>
+        <div class="side-box">
+          <h4>Мы в соцсетях</h4>
+          <p style="font-size:14px;color:var(--ink-soft);line-height:1.7">Instagram · Telegram</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="height:60px"></div>
+  `;
+}
+
+function page404(){
+  return `<div class="container"><div class="empty-state" style="margin:100px 0">Страница не найдена. <a class="btn-ghost" href="#/" data-action="nav" data-route="/">На главную</a></div></div>`;
+}
+
+/* =================================================================
+   HERO 3D TILT — subtle pointer-driven parallax on the hero photo
+================================================================= */
+function initHeroTilt(){
+  const container=document.querySelector('.hero-visual');
+  const wrap=container ? container.querySelector('.tilt-wrap') : null;
+  if(!container||!wrap) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let rect=null;
+  function update(clientX,clientY){
+    if(!rect) rect=container.getBoundingClientRect();
+    const px=(clientX-rect.left)/rect.width;
+    const py=(clientY-rect.top)/rect.height;
+    const rotY=(px-0.5)*16;
+    const rotX=(0.5-py)*16;
+    wrap.style.transform=`rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale(1.035)`;
+    container.style.setProperty('--gx',(px*100).toFixed(1)+'%');
+    container.style.setProperty('--gy',(py*100).toFixed(1)+'%');
+  }
+  function reset(){
+    wrap.style.transform='rotateX(0deg) rotateY(0deg) scale(1)';
+    rect=null;
+  }
+  container.addEventListener('mouseenter',()=>{rect=container.getBoundingClientRect();});
+  container.addEventListener('mousemove',(e)=>update(e.clientX,e.clientY));
+  container.addEventListener('mouseleave',reset);
+  container.addEventListener('touchmove',(e)=>{if(e.touches[0])update(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
+  container.addEventListener('touchend',reset);
+  window.addEventListener('resize',()=>{rect=null;});
+}
+
+/* =================================================================
+   ROUTER
+================================================================= */
+function parseRoute(){
+  const hash=location.hash.slice(1)||'/';
+  const parts=hash.split('/').filter(Boolean);
+  return parts;
+}
+let navStack=[];
+let lastRoute=null;
+let isBackNav=false;
+
+function render(){
+  const parts=parseRoute();
+  let html='';
+  if(parts.length===0) html=pageHome();
+  else if(parts[0]==='exhibitions' && parts[1]) html=pageExhibitionDetail(parts[1]);
+  else if(parts[0]==='exhibitions') html=pageExhibitions();
+  else if(parts[0]==='events' && parts[1]) html=pageEventDetail(parts[1]);
+  else if(parts[0]==='events') html=pageEvents();
+  else if(parts[0]==='gallery' && parts[1]) html=pageArtworkDetail(parts[1]);
+  else if(parts[0]==='gallery') html=pageGallery();
+  else if(parts[0]==='visit') html=pageVisit();
+  else if(parts[0]==='tickets') html=pageTickets();
+  else if(parts[0]==='about') html=pageAbout();
+  else if(parts[0]==='contact') html=pageContact();
+  else html=page404();
+  const app=document.getElementById('app');
+  app.style.animation='none'; void app.offsetWidth; app.style.animation='';
+  app.innerHTML=html;
+  renderNav();
+  document.getElementById('mobileMenu').classList.remove('open');
+
+  const currentRoute='#'+(location.hash.slice(1)||'/');
+  if(lastRoute!==null && lastRoute!==currentRoute){
+    if(!isBackNav) navStack.push(lastRoute);
+  }
+  isBackNav=false;
+  lastRoute=currentRoute;
+  const backBar=document.getElementById('backBar');
+  if(backBar) backBar.classList.toggle('show', parts.length>0);
+
+  if(parts.length===0) requestAnimationFrame(initHeroTilt);
+
+  window.scrollTo({top:0,behavior:'instant' in window ? 'instant':'auto'});
+}
+
+/* =================================================================
+   TOAST
+================================================================= */
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer=setTimeout(()=>t.classList.remove('show'),2600);
+}
+
+/* =================================================================
+   EVENT DELEGATION
+================================================================= */
+document.addEventListener('click',function(e){
+  const el=e.target.closest('[data-action]');
+  if(!el) return;
+  const action=el.getAttribute('data-action');
+
+  if(action==='nav'){
+    e.preventDefault();
+    const route=el.getAttribute('data-route');
+    location.hash='#'+route;
+    return;
+  }
+  if(action==='goBack'){
+    e.preventDefault();
+    if(navStack.length>0){
+      isBackNav=true;
+      const target=navStack.pop();
+      location.hash=target;
+    } else {
+      const parts=parseRoute();
+      const target = parts.length>1 ? '/'+parts[0] : '/';
+      location.hash='#'+target;
+    }
+    return;
+  }
+  if(action==='toggleMenu'){
+    document.getElementById('mobileMenu').classList.toggle('open');
+    return;
+  }
+  if(action==='setGalleryFilter'){
+    state.gallery.filter=el.getAttribute('data-val');
+    render();
+    return;
+  }
+  if(action==='setEventsRange'){
+    state.events.range=el.getAttribute('data-val');
+    render();
+    return;
+  }
+  if(action==='setEventsType'){
+    state.events.type=el.getAttribute('data-val');
+    render();
+    return;
+  }
+  if(action==='eventsMonth'){
+    state.events.monthOffset+=parseInt(el.getAttribute('data-dir'),10);
+    if(state.events.monthOffset<0) state.events.monthOffset=0;
+    render();
+    return;
+  }
+  if(action==='pickEventDate'){
+    const dateStr=el.getAttribute('data-date');
+    document.querySelectorAll('#eventsList').forEach(l=>l.scrollIntoView({behavior:'smooth',block:'start'}));
+    toast('Показаны события на '+dateStr);
+    return;
+  }
+  if(action==='qtyInc'){
+    const id=el.getAttribute('data-id');
+    state.ticket.cart[id]++;
+    render();
+    return;
+  }
+  if(action==='qtyDec'){
+    const id=el.getAttribute('data-id');
+    if(state.ticket.cart[id]>0) state.ticket.cart[id]--;
+    render();
+    return;
+  }
+  if(action==='ticketMonth'){
+    state.ticket.monthOffset+=parseInt(el.getAttribute('data-dir'),10);
+    if(state.ticket.monthOffset<0) state.ticket.monthOffset=0;
+    render();
+    return;
+  }
+  if(action==='pickDate'){
+    state.ticket.date=el.getAttribute('data-date');
+    state.ticket.time=null;
+    render();
+    return;
+  }
+  if(action==='pickTime'){
+    state.ticket.time=el.getAttribute('data-time');
+    render();
+    return;
+  }
+  if(action==='ticketNext'){
+    const step=parseInt(el.getAttribute('data-step'),10);
+    state.ticket.step=step;
+    render();
+    return;
+  }
+  if(action==='reserveEvent'){
+    const id=el.getAttribute('data-id');
+    state.reservedEvents.add(id);
+    render();
+    toast('Место забронировано — ждём вас!');
+    return;
+  }
+  if(action==='newBooking'){
+    state.ticket={cart:{adult:0,student:0,child:0,senior:0,guided:0},monthOffset:0,date:null,time:null,step:1,confirmed:null};
+    render();
+    return;
+  }
+});
+
+document.addEventListener('input',function(e){
+  if(e.target.id==='gallerySearch'){
+    state.gallery.search=e.target.value;
+    const start=e.target.selectionStart;
+    render();
+    const el=document.getElementById('gallerySearch');
+    if(el){el.focus(); el.setSelectionRange(start,start);}
+  }
+});
+document.addEventListener('change',function(e){
+  const action=e.target.getAttribute('data-action-input');
+  if(action==='galleryArtist'){state.gallery.artist=e.target.value; render();}
+  if(action==='galleryYear'){state.gallery.year=e.target.value; render();}
+});
+
+document.addEventListener('submit',function(e){
+  if(e.target.id==='checkoutForm'){
+    e.preventDefault();
+    const name=document.getElementById('ckName');
+    const email=document.getElementById('ckEmail');
+    const phone=document.getElementById('ckPhone');
+    let valid=true;
+    const emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+    toggleErr('row-name', name.value.trim().length<2); if(name.value.trim().length<2) valid=false;
+    toggleErr('row-email', !emailOk); if(!emailOk) valid=false;
+    toggleErr('row-phone', phone.value.trim().length<5); if(phone.value.trim().length<5) valid=false;
+    if(!valid) return;
+    const bookingId='AA-'+Math.random().toString(36).slice(2,8).toUpperCase();
+    state.ticket.confirmed={
+      bookingId,name:name.value.trim(),email:email.value.trim(),phone:phone.value.trim(),
+      date:state.ticket.date,time:state.ticket.time,count:cartCount(),total:cartTotal(),
+    };
+    render();
+    return;
+  }
+  if(e.target.id==='contactForm'){
+    e.preventDefault();
+    const n=document.getElementById('cName'), em=document.getElementById('cEmail'), sub=document.getElementById('cSubject'), msg=document.getElementById('cMessage');
+    let valid=true;
+    const emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim());
+    toggleErr('row-cname', n.value.trim().length<2); if(n.value.trim().length<2) valid=false;
+    toggleErr('row-cemail', !emailOk); if(!emailOk) valid=false;
+    toggleErr('row-csubject', sub.value.trim().length<2); if(sub.value.trim().length<2) valid=false;
+    toggleErr('row-cmessage', msg.value.trim().length<4); if(msg.value.trim().length<4) valid=false;
+    if(!valid) return;
+    e.target.reset();
+    document.getElementById('contactSuccess').style.display='block';
+    toast('Сообщение отправлено.');
+    return;
+  }
+});
+function toggleErr(rowId,hasErr){
+  const row=document.getElementById(rowId);
+  if(!row) return;
+  row.classList.toggle('err',hasErr);
+}
+
+/* =================================================================
+   INIT
+================================================================= */
+window.addEventListener('hashchange',render);
+window.addEventListener('DOMContentLoaded',render);
+render();
+</script>
+</body>
+</html>
