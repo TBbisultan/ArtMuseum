@@ -189,7 +189,7 @@ body{overflow-anchor:none;}
 @media (max-width:520px){.footer-grid{grid-template-columns:1fr;}}
 
 /* ============ СТРАНИЦЫ С ДЕТАЛЯМИ ============ */
-.detail-hero{aspect-ratio:16/8;overflow:hidden;border-bottom:1px solid var(--line);background:var(--paper-2);}
+.detail-hero{width:100%;aspect-ratio:16/8;max-height:620px;overflow:hidden;border-bottom:1px solid var(--line);background:var(--paper-2);display:flex;align-items:center;justify-content:center;}
 .detail-hero svg{width:100%;height:100%;}
 .detail-head{padding:44px 0 10px;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;}
 .detail-title{font-size:clamp(30px,4.5vw,54px);}
@@ -378,43 +378,43 @@ function fmtLong(d){return d.toLocaleDateString('ru-RU',{weekday:'long',month:'l
 function fmtShort(d){return d.toLocaleDateString('ru-RU',{month:'short',day:'numeric'});}
 
 const EXHIBITIONS = [
-  {id:'digital-human',img:'cartinka1.jpg',gallery:[null,null,null,null],title:'Цифровой человек',artist:'Елена Восс',category:'Скульптура',status:'current',
+  {id:'digital-human',img:'cartinka1.jpg',detailImg:'cartinka1.1.jpg',gallery:['cart1.jpg','cart2.jpg','cart3.jpg','cart4.jpg'],title:'Цифровой человек',artist:'Елена Восс',category:'Скульптура',status:'current',
    dateStart:addDays(TODAY,-40),dateEnd:addDays(TODAY,42),dateLabel:'12 сен — 24 ноя 2026',location:'Зал A · 1 этаж',
    short:'Тело, воссозданное в коде — скульптура, motion capture и синтетическая кожа.',
    long:['«Цифровой человек» исследует то, что остаётся от тела после сканирования, риггинга и рендера. Елена Восс наносит синтетическую кожу на каркасы, построенные по данным motion capture, создавая фигуры, которые читаются одновременно как интимные и промышленные.',
          'Выставка разворачивается в пяти залах — от скульптур из необработанных данных до полностью готовых фигур, освещённых как на модных съёмках. Посетителям предлагается пройти весь путь тела, превращающегося в изображение.'],
    hours:'10:00 — 20:00, вт–вс'},
-  {id:'silent-architecture',img:'cartinka2.jpg',gallery:[null,null,null,null],title:'Тихая архитектура',artist:'Томас Рейес',category:'Фотография',status:'current',
+  {id:'silent-architecture',img:'cartinka2.jpg',detailImg:null,gallery:[null,null,null,null],title:'Тихая архитектура',artist:'Томас Рейес',category:'Фотография',status:'current',
    dateStart:addDays(TODAY,-25),dateEnd:addDays(TODAY,20),dateLabel:'03 авг — 15 окт 2026',location:'Зал C · 2 этаж',
    short:'Крупноформатные фотографии бруталистских интерьеров без людей.',
    long:['Томас Рейес три года снимал муниципальные здания Центральной Азии на рассвете, до прихода сотрудников. Получившиеся отпечатки оставляют бетон, свет и тень единственными обитателями этих пространств.',
          '«Тихая архитектура» задаётся вопросом, что здание говорит об обществе, когда из кадра исчезают люди.'],
    hours:'10:00 — 20:00, вт–вс'},
-  {id:'fragments-of-light',img:'cartinka3.jpg',gallery:[null,null,null,null],title:'Осколки света',artist:'Ингрид Сорель',category:'Живопись',status:'current',
+  {id:'fragments-of-light',img:'cartinka3.jpg',detailImg:null,gallery:[null,null,null,null],title:'Осколки света',artist:'Ингрид Сорель',category:'Живопись',status:'current',
    dateStart:addDays(TODAY,-15),dateEnd:addDays(TODAY,60),dateLabel:'20 июл — 05 окт 2026',location:'Зал B · 1 этаж',
    short:'Масляные этюды побережий, написанные по памяти, а не с натуры.',
    long:['Ингрид Сорель пишет исключительно по памяти, отказываясь от фотографий как источника. Результат — серия прибрежных сцен, дрейфующих к абстракции, объединённых дисциплиной её палитры.',
          'Это её первая институциональная ретроспектива, объединяющая одиннадцать лет работы в мастерской.'],
    hours:'10:00 — 20:00, вт–вс'},
-  {id:'the-vanishing-point',img:null,gallery:[null,null,null,null],title:'Точка схода',artist:'Noema Collective',category:'Инсталляция',status:'upcoming',
+  {id:'the-vanishing-point',img:null,detailImg:null,gallery:[null,null,null,null],title:'Точка схода',artist:'Noema Collective',category:'Инсталляция',status:'upcoming',
    dateStart:addDays(TODAY,55),dateEnd:addDays(TODAY,150),dateLabel:'02 дек 2026 — 18 фев 2027',location:'Зал D · 2 этаж',
    short:'Инсталляция в масштабе комнаты — зеркальные коридоры и смещённая перспектива.',
    long:['Noema Collective строят архитектуру, которая не даёт зафиксировать единую точку обзора. «Точка схода» помещает посетителей в коридор из наклонных зеркал, которые никогда не складываются в единое устойчивое отражение.',
          'Инсталляция была впервые показана в Лиссабоне и перестроена для AA в удвоенном масштабе.'],
    hours:'Открытие 02 дек 2026'},
-  {id:'matter-and-memory',img:null,gallery:[null,null,null,null],title:'Материя и память',artist:'Адаезе Нвосу',category:'Скульптура',status:'upcoming',
+  {id:'matter-and-memory',img:null,detailImg:null,gallery:[null,null,null,null],title:'Материя и память',artist:'Адаезе Нвосу',category:'Скульптура',status:'upcoming',
    dateStart:addDays(TODAY,90),dateEnd:addDays(TODAY,200),dateLabel:'14 янв — 30 мар 2027',location:'Зал A · 1 этаж',
    short:'Бронзовые формы, отлитые по сканам бытовых предметов.',
    long:['Адаезе Нвосу сканирует повседневные предметы из своей семьи и переотливает их в бронзе в изменённом масштабе, превращая домашний беспорядок в монументы.',
          '«Материя и память» — её первая персональная выставка за пределами Западной Африки.'],
    hours:'Открытие 14 янв 2027'},
-  {id:'after-nature',img:null,gallery:[null,null,null,null],title:'После природы',artist:'Studio Kleón',category:'Фотография',status:'past',
+  {id:'after-nature',img:null,detailImg:null,gallery:[null,null,null,null],title:'После природы',artist:'Studio Kleón',category:'Фотография',status:'past',
    dateStart:addDays(TODAY,-180),dateEnd:addDays(TODAY,-90),dateLabel:'10 мар — 02 июн 2026',location:'Зал C · 2 этаж',
    short:'Документальная фотография рекультивированных промышленных земель.',
    long:['«После природы» прослеживает медленное возвращение растительности на закрытые горнодобывающие участки на трёх континентах.',
          'Выставка завершилась в июне 2026 года после двенадцати недель показа.'],
    hours:'Закрыта'},
-  {id:'starry-night-revisited',img:null,gallery:[null,null,null,null],title:'Звёздная ночь. Новый взгляд',artist:'Юки Танака',category:'Живопись',status:'past',
+  {id:'starry-night-revisited',img:null,detailImg:null,gallery:[null,null,null,null],title:'Звёздная ночь. Новый взгляд',artist:'Юки Танака',category:'Живопись',status:'past',
    dateStart:addDays(TODAY,-240),dateEnd:addDays(TODAY,-180),dateLabel:'05 янв — 28 фев 2026',location:'Зал B · 1 этаж',
    short:'Современное осмысление ночного неба Ван Гога.',
    long:['Юки Танака переосмыслила вихревое небо Ван Гога через призму данных о световом загрязнении, заменив звёзды следами спутников.',
@@ -423,21 +423,21 @@ const EXHIBITIONS = [
 ];
 
 const EVENTS = [
-  {id:'talk-elena-voss',img:'cartinka1.jpg',title:'Встреча с художником: Елена Восс',type:'talk',typeLabel:'Лекция',date:addDays(TODAY,2),time:'18:30',duration:'60 мин',location:'Аудитория',
+  {id:'talk-elena-voss',img:'cartinka7.jpg',detailImg:null,title:'Встреча с художником: Елена Восс',type:'talk',typeLabel:'Лекция',date:addDays(TODAY,2),time:'18:30',duration:'60 мин',location:'Аудитория',
    desc:'Елена Восс рассказывает о создании «Цифрового человека» и этике сканирования тела.',seats:24,seatsLeft:9,relatedExhibition:'digital-human'},
-  {id:'tour-digital-human',img:null,title:'Экскурсия: Цифровой человек',type:'tour',typeLabel:'Экскурсия',date:addDays(TODAY,1),time:'11:00',duration:'45 мин',location:'Зал A',
+  {id:'tour-digital-human',img:'cartinka5.jpg',detailImg:null,title:'Экскурсия: Цифровой человек',type:'tour',typeLabel:'Экскурсия',date:addDays(TODAY,1),time:'11:00',duration:'45 мин',location:'Зал A',
    desc:'Подробный разбор создания «Цифрового человека» с одним из наших кураторов.',seats:15,seatsLeft:5,relatedExhibition:'digital-human'},
-  {id:'workshop-build-light',img:null,title:'Семейный мастер-класс: Строим со светом',type:'workshop',typeLabel:'Мастер-класс',date:addDays(TODAY,6),time:'12:00',duration:'90 мин',location:'Студия 2',
+  {id:'workshop-build-light',img:null,detailImg:null,title:'Семейный мастер-класс: Строим со светом',type:'workshop',typeLabel:'Мастер-класс',date:addDays(TODAY,6),time:'12:00',duration:'90 мин',location:'Студия 2',
    desc:'Практическое занятие для семей — свет, тень и простые электрические схемы.',seats:20,seatsLeft:20,relatedExhibition:null},
-  {id:'screening-optical-unconscious',img:null,title:'Показ фильма: Оптическое бессознательное',type:'screening',typeLabel:'Показ',date:addDays(TODAY,9),time:'19:30',duration:'85 мин',location:'Аудитория',
+  {id:'screening-optical-unconscious',img:null,detailImg:null,title:'Показ фильма: Оптическое бессознательное',type:'screening',typeLabel:'Показ',date:addDays(TODAY,9),time:'19:30',duration:'85 мин',location:'Аудитория',
    desc:'Короткий документальный фильм о фотографии и восприятии с последующим обсуждением.',seats:60,seatsLeft:41,relatedExhibition:'silent-architecture'},
-  {id:'tour-silent-architecture',img:null,title:'Экскурсия: Тихая архитектура',type:'tour',typeLabel:'Экскурсия',date:addDays(TODAY,4),time:'15:00',duration:'45 мин',location:'Зал C',
+  {id:'tour-silent-architecture',img:'cartinka6.jpg',detailImg:null,title:'Экскурсия: Тихая архитектура',type:'tour',typeLabel:'Экскурсия',date:addDays(TODAY,4),time:'15:00',duration:'45 мин',location:'Зал C',
    desc:'Прогулка по фотографиям Томаса Рейеса с членом нашей кураторской команды.',seats:15,seatsLeft:0,relatedExhibition:'silent-architecture'},
-  {id:'talk-fragments-of-light',img:null,title:'Беседа с куратором: Осколки света',type:'talk',typeLabel:'Лекция',date:addDays(TODAY,14),time:'18:00',duration:'50 мин',location:'Зал B',
+  {id:'talk-fragments-of-light',img:null,detailImg:null,title:'Беседа с куратором: Осколки света',type:'talk',typeLabel:'Лекция',date:addDays(TODAY,14),time:'18:00',duration:'50 мин',location:'Зал B',
    desc:'Подробный разбор прибрежных картин Ингрид Сорель с нашим главным куратором.',seats:30,seatsLeft:22,relatedExhibition:'fragments-of-light'},
-  {id:'workshop-darkroom',img:null,title:'Мастер-класс: Основы фотолаборатории',type:'workshop',typeLabel:'Мастер-класс',date:addDays(TODAY,20),time:'10:30',duration:'120 мин',location:'Студия 1',
+  {id:'workshop-darkroom',img:null,detailImg:null,title:'Мастер-класс: Основы фотолаборатории',type:'workshop',typeLabel:'Мастер-класс',date:addDays(TODAY,20),time:'10:30',duration:'120 мин',location:'Студия 1',
    desc:'Введение в аналоговую печать для начинающих. Материалы включены.',seats:12,seatsLeft:3,relatedExhibition:null},
-  {id:'screening-structures-of-seeing',img:null,title:'Ночной показ: Структуры зрения',type:'screening',typeLabel:'Показ',date:addDays(TODAY,27),time:'20:00',duration:'70 мин',location:'Аудитория',
+  {id:'screening-structures-of-seeing',img:null,detailImg:null,title:'Ночной показ: Структуры зрения',type:'screening',typeLabel:'Показ',date:addDays(TODAY,27),time:'20:00',duration:'70 мин',location:'Аудитория',
    desc:'Ночная программа экспериментальных короткометражных фильмов о зрении и пространстве.',seats:60,seatsLeft:52,relatedExhibition:null},
 ];
 
@@ -582,6 +582,21 @@ function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;',
 function media(imgUrl, altText, svgFallback){
   if(imgUrl) return `<img src="${esc(imgUrl)}" alt="${esc(altText)}" style="width:100%;height:100%;object-fit:contain;display:block;">`;
   return svgFallback;
+}
+
+// для широких баннеров (.detail-hero): подгоняет высоту блока под реальные
+// пропорции загруженного фото, чтобы портретные/квадратные фото не тонули
+// в пустых полях внутри широкой рамки 16:8
+function mediaHero(imgUrl, altText, svgFallback){
+  if(imgUrl) return `<img src="${esc(imgUrl)}" alt="${esc(altText)}" style="width:100%;height:100%;object-fit:contain;display:block;" onload="fitHeroBanner(this)">`;
+  return svgFallback;
+}
+function fitHeroBanner(img){
+  const box = img.closest('.detail-hero');
+  if(!box || !img.naturalWidth || !img.naturalHeight) return;
+  let ratio = img.naturalWidth / img.naturalHeight;
+  ratio = Math.max(0.68, Math.min(ratio, 2.6)); // от портрета ~2:3 до широкого панорамного ~21:8
+  box.style.aspectRatio = ratio;
 }
 
 /* =================================================================
@@ -767,7 +782,7 @@ function pageExhibitionDetail(id){
   if(!e) return page404();
   const related=EVENTS.filter(ev=>ev.relatedExhibition===id).slice(0,2);
   return `
-  <div class="detail-hero">${media(e.img,e.title,artSVG(e.id,{w:1400,h:700,density:9,alt:e.title}))}</div>
+  <div class="detail-hero">${mediaHero(e.detailImg||e.img,e.title,artSVG(e.id,{w:1400,h:700,density:9,alt:e.title}))}</div>
   <div class="container">
     <div class="detail-head">
       <div>
@@ -880,7 +895,7 @@ function pageEventDetail(id){
   const seatsLeft=ev.seatsLeft-(reserved?1:0);
   const soldOut=seatsLeft<=0;
   return `
-  <div class="detail-hero">${media(ev.img,ev.title,artSVG(ev.id,{w:1400,h:700,density:7,accent:true,alt:ev.title}))}</div>
+  <div class="detail-hero">${mediaHero(ev.detailImg||ev.img,ev.title,artSVG(ev.id,{w:1400,h:700,density:7,accent:true,alt:ev.title}))}</div>
   <div class="container">
     <div class="detail-head">
       <div>
